@@ -2,7 +2,7 @@
 if ( ! defined( 'ABSPATH' ) ) {
 	die;
 } // Cannot access pages directly.
-class Mage_Cpt {
+class Tour_Cpt {
 
 	public function __construct() {
 		add_action( 'init', array( $this, 'register_cpt' ) );
@@ -47,4 +47,4 @@ class Mage_Cpt {
 
 }
 
-new Mage_Cpt();
+new Tour_Cpt();

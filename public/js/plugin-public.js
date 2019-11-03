@@ -2,6 +2,7 @@
 
     $(document).ready(function () {
 
+
         // selected hotel details show by selected options
         $('.hotel').on('change', function () {
             var $hotel = $(this).val();
@@ -14,8 +15,10 @@
                 $('.hotel_details').addClass('display_hotel');
                 $('.hotel_details').removeClass('no_hotel');
 
+
+
                 $.ajax({
-                    method: "POST",
+                    type: 'POST',
                     url: woo_tour.ajaxurl,
                     data: {
                         'action': 'show_hotel_by_option_selected',
@@ -25,6 +28,7 @@
                     dataType: "text",
                     success: function (data) {
                         $(".hotel_details").html(data);
+                        
                     }
                 })
 
@@ -70,7 +74,9 @@
 
                 $(".total").text(total_room_price);
 
+                $(".total_person").attr({"value": total_person});
                 $(".total_person").attr({"max": total_person});
+
 
                 if (total_room_price > 0) {
                     $('.pop_up_add_to_cart_button').show();
@@ -128,8 +134,12 @@
 
         });
 
-        $("#create-user").on("click", function (e) {
-            e.preventDefault();
+        $("#create-user").on("click", function (event) {
+            event.preventDefault();
+        });
+
+        $("#create-user").click(function (event) {
+            event.preventDefault();
         });
 
 

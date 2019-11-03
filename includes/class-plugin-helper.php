@@ -100,6 +100,12 @@ if ( ! class_exists( 'Tour_Booking_Helper' ) ) {
 						$tour_price = maybe_unserialize( get_post_meta( $post->ID, 'hotel_room_details',
 							true ) );
 						
+						$tour_duration = get_post_meta( $post->ID, 'tour_duration', true );
+						
+						if ( empty( $tour_duration ) ) {
+							$tour_duration = 1;
+						}
+						
 						if ( ! is_array( $tour_price ) ) {
 							$tour_price = array();
 						}
@@ -134,11 +140,13 @@ if ( ! class_exists( 'Tour_Booking_Helper' ) ) {
 
                                             <td class="price-td">
                                                 <span class="room_price" style="display: none">
-                                                    <?php esc_html_e( $room['room_fare'] ); ?>
+                                                    <?php esc_html_e( $room['room_fare'] *
+                                                                      $tour_duration ); ?>
                                                 </span>
 
                                                 <span>
-                                                    <?php echo wc_price( $room['room_fare'] ); ?>
+                                                    <?php echo wc_price( $room['room_fare'] *
+                                                                         $tour_duration ); ?>
                                                 </span>
 
                                                 <span class="person_capacity" style="display: none">
@@ -154,7 +162,7 @@ if ( ! class_exists( 'Tour_Booking_Helper' ) ) {
                                             </td>
 
                                             <td>
-                                                <select value="" class="qty" name="room_qty[]" required>
+                                                <select class="qty" name="room_qty[]" required>
                                                     <option value='0'>0</option>
 	                                                <?php
 	                                                for ( $i = 1; $i <= $room['room_qty']; $i ++ ) {
@@ -172,11 +180,12 @@ if ( ! class_exists( 'Tour_Booking_Helper' ) ) {
                                     <tr>
                                         <td colspan="2">
                                             <?php
-                                            echo esc_html__( 'No of Traveller', 'woocommerce-tour-booking-manager' ); ?></td>
+                                            echo esc_html__( 'No of Traveller',
+	                                            'woocommerce-tour-booking-manager' ); ?></td>
 
                                         <td align="right">
-                                            <input type="number" min="0" max="0" class="total_person"
-                                                   value="0" name="total_person" required>
+                                            <input type="number" required min="1" max="0" class="total_person"
+                                                   value="1" name="total_person">
                                         </td>
                                     </tr>
 
@@ -331,7 +340,7 @@ if ( ! class_exists( 'Tour_Booking_Helper' ) ) {
                                 <ul>
                                     <li><img src="<?php echo PLUGIN_URL . 'public/images/module-calender.png'; ?>"
                                              alt="calender">
-                                        <span><?php echo esc_html__( '' . $tour_duration . ' Day', 'woocommerce-tour-booking-manager' ) ?></span>
+                                        <span><?php esc_html_e( '' . $tour_duration . ' Day', 'woocommerce-tour-booking-manager' ) ?></span>
                                     </li>
                                     <li>
                                         <img src="<?php

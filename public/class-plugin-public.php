@@ -8,7 +8,7 @@ if ( ! defined( 'ABSPATH' ) ) {
  * @subpackage Mage_Plugin/public
  * @author     MagePeople team <magepeopleteam@gmail.com>
  */
-class Mage_Plugin_Public {
+class Tour_Plugin_Public {
 	
 	private $plugin_name;
 	
@@ -137,6 +137,14 @@ class Mage_Plugin_Public {
 		if ( ! is_array( $room_details ) ) {
 			$room_details = array();
 		}
+		
+		
+		$tour_duration = get_post_meta( $tour_id, 'tour_duration', true );
+		
+		if ( empty( $tour_duration ) ) {
+			$tour_duration = 1;
+		}
+		
 		?>
 
         <table>
@@ -155,15 +163,15 @@ class Mage_Plugin_Public {
 						<?php esc_html_e( $room['room_type'] ); ?>
                         <input type="hidden" name="room_cap[]"
                                value="<?php esc_html_e( $room['person_capacity'] ); ?>_<?php echo trim( $room['room_type'] ); ?>_<?php trim( esc_html_e( $room['room_fare'] ) ); ?>">
-                        
+
                     </td>
 
                     <td class="price-td">
                         <span style="display: none" class="room_price">
-                            <?php esc_html_e( $room['room_fare'] ); ?>
+                            <?php esc_html_e( $room['room_fare'] * $tour_duration ); ?>
                         </span>
 
-                        <span><?php echo wc_price( $room['room_fare'] ); ?></span>
+                        <span><?php echo wc_price( $room['room_fare'] * $tour_duration ); ?></span>
 
                         <span class="person_capacity" style="display: none">
 
@@ -195,7 +203,7 @@ class Mage_Plugin_Public {
                 <td colspan="2"><?php echo esc_html__( 'Total Person', 'woocommerce-tour-booking-manager' ); ?></td>
 
                 <td align="right">
-                    <input type="number" min="0" max="0" class="total_person" value="0" name="total_person">
+                    <input type="number" max="0" min="1" class="total_person" value="0" name="total_person" />
                 </td>
 
             </tr>
@@ -268,4 +276,4 @@ class Mage_Plugin_Public {
 	
 }
 
-new Mage_Plugin_Public();
+new Tour_Plugin_Public();

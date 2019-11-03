@@ -27,7 +27,7 @@ if ( is_plugin_active( 'woocommerce/woocommerce.php' ) ) {
 	 * The code that runs during plugin activation.
 	 * This action is documented in includes/class-mage-plugin-activator.php
 	 */
-	function mage_activate_mage_plugin() {
+	function tour_activation_plugin() {
 		require_once plugin_dir_path( __FILE__ ) . 'includes/class-plugin-activator.php';
 		Plugin_Activator::active();
 	}
@@ -36,16 +36,16 @@ if ( is_plugin_active( 'woocommerce/woocommerce.php' ) ) {
 	 * The code that runs during plugin deactivation.
 	 * This action is documented in includes/class-mage-plugin-deactivator.php
 	 */
-	function mage_deactivate_mage_plugin() {
+	function tour_deactivation_plugin() {
 		require_once plugin_dir_path( __FILE__ ) . 'includes/class-plugin-deactivator.php';
 		// Mage_Plugin_Deactivator::deactivate();
 	}
 
-	register_activation_hook( __FILE__, 'mage_activate_mage_plugin' );
-	register_deactivation_hook( __FILE__, 'mage_deactivate_mage_plugin' );
+	register_activation_hook( __FILE__, 'tour_activation_plugin' );
+	register_deactivation_hook( __FILE__, 'tour_deactivation_plugin' );
 
 
-	class Mage_Tour_Base {
+	class Tour_Base {
 
 		public function __construct() {
 			$this->define_constants();
@@ -69,7 +69,7 @@ if ( is_plugin_active( 'woocommerce/woocommerce.php' ) ) {
 		}
 	}
 
-	new Mage_Tour_Base();
+	new Tour_Base();
 } else {
 	function mep_admin_notice_wc_not_active() {
 		printf(

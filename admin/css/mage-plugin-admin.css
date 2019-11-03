@@ -321,3 +321,9 @@ select2 param css
     background: #eba3a3;
     color: #761919;
 }
+
+.site-footer {
+    background: #fff !important;
+    color: #bbbbbb;
+    font-size: 14px;
+}

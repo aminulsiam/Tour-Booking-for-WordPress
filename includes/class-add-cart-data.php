@@ -257,15 +257,21 @@ class Tour_WotmCartCalculation {
 				
 				foreach ( $ticket_user_info as $user_info ) {
 					echo '<ul class="cart-user-list"  style="margin-bottom: 30px!important">';
+					
+					if ( ! is_array( $reg_form_arr ) ) {
+						$reg_form_arr = array();
+					}
+					
 					foreach ( $reg_form_arr as $_reg ) {
 						
 						if ( "" != $user_info[ $_reg['field_id'] ] ) {
 							
 							echo '<li>' . $_reg['field_label'] . ': ' . $user_info[ $_reg['field_id'] ] .
-                                 '</li>';
+							     '</li>';
 						}
 						
 					}
+					
 					echo '<li>Room Name: ' . $user_info['room_name'] . '</li>';
 //					echo '<li>Room Fare: ' . wc_price($user_info['room_price']) . '</li>';
 					echo '</ul>';

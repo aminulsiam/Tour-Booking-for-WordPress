@@ -8,7 +8,7 @@ if ( ! defined( 'ABSPATH' ) ) {
  * @subpackage Mage_Plugin/admin
  * @author     MagePeople team <magepeopleteam@gmail.com>
  */
-class Mage_Plugin_Admin {
+class Tour_Plugin_Admin {
 	
 	private $plugin_name;
 	
@@ -356,6 +356,6 @@ class Mage_Plugin_Admin {
 	
 }
 
-new Mage_Plugin_Admin();
+new Tour_Plugin_Admin();
 
 

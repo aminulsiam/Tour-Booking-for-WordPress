@@ -82,7 +82,6 @@ class Woo_Tour_Meta {
 
 						array(
 							'id'      => 'tour_offer_type',
-							//'field_name'		    => 'text_multi_field',
 							'title'   => __( 'Tour Type', 'woocommerce-tour-booking-manager' ),
 							'details' => __( 'You can select your tour offer type,',
 								'woocommerce-tour-booking-manager' ),

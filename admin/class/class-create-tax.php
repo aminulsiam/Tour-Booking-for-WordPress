@@ -3,7 +3,7 @@ if ( ! defined( 'ABSPATH' ) ) {
 	die;
 } // Cannot access pages directly.
 
-class Mage_Tax {
+class Tour_Tax {
 	public function __construct() {
 		add_action( "init", array( $this, "mage_tax_init" ), 5 );
 	}
@@ -75,4 +75,4 @@ class Mage_Tax {
 
 	}
 }
-new Mage_Tax();
+new Tour_Tax();
