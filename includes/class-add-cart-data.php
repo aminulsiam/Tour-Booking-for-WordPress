@@ -81,8 +81,13 @@ class Tour_WotmCartCalculation {
 			$tour_hotel_room_qty   = isset( $_POST['room_qty'] ) ? $_POST['room_qty'] : "";
 			
 			
-			$reg_form_arr = maybe_unserialize( get_post_meta( $product_id, 'attendee_reg_form',
-				true ) );
+			$reg_form_arr = maybe_unserialize( get_post_meta( $product_id, 'attendee_reg_form', true ) );
+			
+			/*$reg_form_arr = apply_filters( 'form_builder_data', array() );
+			
+			write_log( $reg_form_arr );
+			
+			exit();*/
 			
 			$cn = 0;
 			foreach ( $tour_hotel_room_cap as $cap ) {
@@ -150,14 +155,22 @@ class Tour_WotmCartCalculation {
 				
 				if ( is_array( $reg_form_arr ) && sizeof( $reg_form_arr ) > 0 ) {
 					foreach ( $reg_form_arr as $_reg ) {
-						$hotel_single[ $i ][ $_reg['field_id'] ] = stripslashes( strip_tags( $_POST[ $_reg['field_id'] ][ $i ] ) );
+						
+						$field_id = isset( $_POST[ $_reg['field_id'] ][ $i ] ) ? $_POST[ $_reg['field_id'] ][ $i ] : "";
+						
+						$hotel_single[ $i ][ $_reg['field_id'] ] = stripslashes( strip_tags( $field_id ) );
 					}
 				}
 			}
 			
 			if ( is_array( $reg_form_arr ) && sizeof( $reg_form_arr ) > 0 ) {
 				foreach ( $reg_form_arr as $_reg ) {
-					$hotel_user_single[ $i ][ $_reg['field_id'] ] = stripslashes( strip_tags( $_POST[ $_reg['field_id'] ][ $i ] ) );
+					
+					$field_id = isset( $_POST[ $_reg['field_id'] ][ $i ] ) ? $_POST[ $_reg['field_id'] ][ $i ]
+						: "";
+					
+					$hotel_user_single[ $i ][ $_reg['field_id'] ] = stripslashes( strip_tags( $field_id ) );
+					
 				}
 				
 			} else {
@@ -210,8 +223,8 @@ class Tour_WotmCartCalculation {
 		$qrtid = $cart_item['mage_tour_id'];
 		if ( get_post_type( $qrtid ) == 'mage_tour' ) {
 			$reg_form_arr = maybe_unserialize( get_post_meta( $qrtid, 'attendee_reg_form', true ) );
-			$tour_data  = $cart_item['tour_hotel_info'];
-	
+			$tour_data    = $cart_item['tour_hotel_info'];
+			
 			
 			$ticket_user_info = $cart_item['tour_hotel_single_info'];
 			echo '<ul class="cart-common-list"  style="margin-bottom: 30px!important;">';
@@ -245,7 +258,13 @@ class Tour_WotmCartCalculation {
 				foreach ( $ticket_user_info as $user_info ) {
 					echo '<ul class="cart-user-list"  style="margin-bottom: 30px!important">';
 					foreach ( $reg_form_arr as $_reg ) {
-						echo '<li>' . $_reg['field_label'] . ': ' . $user_info[ $_reg['field_id'] ] . '</li>';
+						
+						if ( "" != $user_info[ $_reg['field_id'] ] ) {
+							
+							echo '<li>' . $_reg['field_label'] . ': ' . $user_info[ $_reg['field_id'] ] .
+                                 '</li>';
+						}
+						
 					}
 					echo '<li>Room Name: ' . $user_info['room_name'] . '</li>';
 //					echo '<li>Room Fare: ' . wc_price($user_info['room_price']) . '</li>';

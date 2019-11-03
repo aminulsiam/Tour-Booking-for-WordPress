@@ -31,7 +31,7 @@
             }
         });//end selected options hotel room details
 
-
+        //gallary pop up
         $('.gallary_image').magnificPopup({
             delegate: 'a',
             type: 'image',
@@ -100,7 +100,7 @@
             });
         }
 
-
+        //jquery dialog form
         $(function () {
             var dialog, form,
 
@@ -133,15 +133,14 @@
         });
 
 
-        $('.total_person').each(function () {
-            $(this).on('mousewheel', function () {
-                return false;
-            });
-        });
-
-
+        // search autocomplete
         $(".search").autocomplete({
             source: woo_tour.pakages,
+        });
+
+        //prevent mouse scrolling for total person selected
+        $('.hotel_details').on('mousewheel', '.total_person', function () {
+            return false;
         });
 
 

@@ -238,9 +238,8 @@ select2 param css
 
 .item textarea {
     width: 100% !important;
-    min-height:150px
+    min-height: 150px
 }
-
 
 .header i {
     color: red;
@@ -249,12 +248,12 @@ select2 param css
 
 /* Meta box design */
 
-
 .taxonomy-hotel_details .form-wrap {
     background: #fff;
     padding: 10px;
     border: 2px solid #ccc;
 }
+
 .taxonomy-hotel_details .form-wrap label {
     display: block;
     padding: 2px 0;
@@ -267,6 +266,7 @@ select2 param css
     color: #fff;
     font-weight: bold;
 }
+
 .taxonomy-hotel_details input#submit {
     width: 100%;
     /* padding: 20px; */
@@ -277,6 +277,7 @@ select2 param css
     text-shadow: none;
     font-weight: bold;
 }
+
 .taxonomy-hotel_details h2 {
     background: #3d6282;
     text-align: center;
@@ -292,9 +293,9 @@ select2 param css
     color: #777;
     background: #e5e5e5;
     border-radius: 4px;
-    border-bottom: 1px solid rgba(0,0,0,.05);
+    border-bottom: 1px solid rgba(0, 0, 0, .05);
     margin: -.25em 0;
-    cursor: inherit!important;
+    cursor: inherit !important;
     white-space: nowrap;
     max-width: 100%;
     padding: 0 20px;
@@ -309,4 +310,14 @@ select2 param css
 .order-status.status-completed {
     background: #c8d7e1;
     color: #2e4453;
+}
+
+.order-status.status-on-hold {
+    background: #f8dda7;
+    color: #94660c;
+}
+
+.order-status.status-failed {
+    background: #eba3a3;
+    color: #761919;
 }
