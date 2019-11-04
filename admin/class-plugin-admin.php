@@ -55,6 +55,8 @@ class Tour_Plugin_Admin {
 	
 	
 	/**
+	 *
+	 *
 	 * @param $order_id
 	 * @param $set_status
 	 * @param $post_status
@@ -129,12 +131,21 @@ class Tour_Plugin_Admin {
 				if ( $order->has_status( 'failed' ) ) {
 					$this->change_tour_booking_status( $order_id, 'publish', 'publish', 'failed' );
 				}
-			} // End of Post Type Check
-		} // End order item foreach
-	} // End Function
+				
+			} //end of Post Type Check
+		} //end order item foreach
+	} //end method change_attendee_status
 	
 	
-	// Get Order Itemdata value by Item id
+	/**
+	 *
+	 *
+	 * Get Order Itemdata value by Item id
+	 * @param $item_id
+	 * @param $key
+	 *
+	 * @return mixed
+	 */
 	public function wtbm_get_order_meta( $item_id, $key ) {
 		global $wpdb;
 		$table_name = $wpdb->prefix . "woocommerce_order_itemmeta";
@@ -303,7 +314,9 @@ class Tour_Plugin_Admin {
 		} //Order Item data Loop
 	} //End of the function
 	
-	
+	/**
+	 * Enqueue all styles
+	 */
 	public function enqueue_styles() {
 		wp_enqueue_style( 'mage-jquery-ui-style', PLUGIN_URL . 'admin/css/jquery-ui.css', array() );
 		wp_enqueue_style( 'pickplugins-options-framework', PLUGIN_URL . 'admin/assets/css/pickplugins-options-framework.css' );
@@ -314,6 +327,9 @@ class Tour_Plugin_Admin {
 		wp_enqueue_style( 'mage-admin-css', PLUGIN_URL . 'admin/css/mage-plugin-admin.css', array(), time(), 'all' );
 	}
 	
+	/**
+	 * Enqueue all scripts
+	 */
 	public function enqueue_scripts() {
 		
 		wp_enqueue_script( 'jquery' );

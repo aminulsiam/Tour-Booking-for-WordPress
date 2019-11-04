@@ -9,6 +9,12 @@ if ( ! defined( 'ABSPATH' ) ) {
  * Declare every function by static keyword.
  */
 if ( ! class_exists( 'Tour_Booking_Helper' ) ) {
+	
+	/**
+	 * Class Tour_Booking_Helper
+	 *
+	 * This is helper class for tour booking
+	 */
 	class Tour_Booking_Helper {
 		
 		/**
@@ -17,6 +23,7 @@ if ( ! class_exists( 'Tour_Booking_Helper' ) ) {
 		 * @param $get_hotel_details
 		 */
 		public static function hotel_details( $get_hotel_details ) {
+			
 			global $post;
 			
 			$hotel_price_source = get_post_meta( $post->ID, 'tour_price_source', true );
@@ -147,6 +154,10 @@ if ( ! class_exists( 'Tour_Booking_Helper' ) ) {
                                                 <span>
                                                     <?php echo wc_price( $room['room_fare'] *
                                                                          $tour_duration ); ?>
+                                                    <p>
+                                                        <?php echo esc_html__( '(You Are selected your tour duration is ' . $tour_duration . ' Nights)', 'woocommerce-tour-booking-manager' ); ?>
+                                                    </p>
+                                                    
                                                 </span>
 
                                                 <span class="person_capacity" style="display: none">
@@ -284,6 +295,8 @@ if ( ! class_exists( 'Tour_Booking_Helper' ) ) {
 		
 		
 		/**
+		 * Search Tour pakages by shortcode.
+		 *
 		 * @param $pakages
 		 * @param $atts
 		 */
@@ -384,7 +397,6 @@ if ( ! class_exists( 'Tour_Booking_Helper' ) ) {
 			wp_reset_postdata();
 			
 		}//end method seard_and_tour_pakage
-		
 		
 	}//end class Tour_Booking_Helper
 }//end if condition

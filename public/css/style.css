@@ -1621,7 +1621,16 @@ h4.mep-cart-table-title {
     display: block;
     overflow: hidden;
 }
+.tour-left-content {
+        width: 60%;
+        float: left;
+        margin-right: 5px;
+    }
 
+ .tour-right-content {
+        width: 30%;
+        float: right;
+ }
 /*
   ##Device = Desktops
   ##Screen = 1281px to higher resolution desktops
@@ -1630,13 +1639,13 @@ h4.mep-cart-table-title {
 @media (min-width: 1281px) {
 
     .tour-left-content {
-        width: 55vw;
+        width: 55%;
         float: left;
         margin-right: 5px;
     }
 
     .tour-right-content {
-        width: 25vw;
+        width: 25%;
         float: right;
     }
 
@@ -1951,8 +1960,17 @@ h4.mep-cart-table-title {
 
 .tour_title h1 {
     margin-top: 20px;
+    font-family: "Roboto",sans-serif;
+    font-size: 22px;
 }
+.tour_destination h3{
+    font-family: "Roboto",sans-serif;
+    font-size: 18px;}
+.tour-right-content{
 
+font-size: 14px;
+
+}
 .hotel_options {
     text-align: center;
 }
@@ -2034,7 +2052,7 @@ input[type=submit]:disabled {
 }
 
 .Module-option .text .validities .validity span {
-    font-size: 0.75rem;
+    font-size: 16px;
 }
 
 .validity span {
@@ -2051,14 +2069,14 @@ input[type=submit]:disabled {
 }
 
 .Module-option .text .validities .validity p span {
-    font-size: 1.5rem;
+    font-size: 16px;
     font-weight: bold;
     margin-right: 4px;
 }
 
 .Module-option .text .validities .validity p small {
     font-weight: 500;
-    font-size: 0.75rem;
+    font-size: 15px;
 }
 
 .Module-option .text .validities .validity p small.price {
@@ -2091,6 +2109,7 @@ input[type=submit]:disabled {
 
 .Module-option .text .row-block .column span {
     display: inline-block;
+    font-size: 18px;
 }
 
 .Module-option .text .row-block .column strong {
@@ -2152,9 +2171,12 @@ input[type=submit]:disabled {
 }
 
 .Module-option .btn {
-    min-width: 23vw;
+    background: green none repeat scroll 0 0;
+    color: #fff;
+    font-size: 22px;
     font-weight: bold;
-    font-size: 1rem;
+    min-width: 23vw;
+    padding: 5px;
 }
 
 .Module-option .buy_now {
@@ -2506,6 +2528,7 @@ div#users-contain table td, div#users-contain table th {
     color: #009688;
     font-weight: bold;
     margin-top: 17px;
+    font-family: "Roboto",sans-serif
 }
 
 .pop-up-left h6 {
@@ -2513,6 +2536,7 @@ div#users-contain table td, div#users-contain table th {
     text-align: center;
     padding: 10px 5px;
     color: #000;
+    font-family: "Roboto",sans-serif
 }
 
 .pop-up-left span {
@@ -2604,11 +2628,12 @@ li {
 }
 
 .pop-up-right h3 {
-    text-align: center;
+    text-align: left;
     padding: 5px 5px;
     color: #009688;
     font-weight: bold;
     margin-top: 17px;
+    font-family: "Roboto",sans-serif
 }
 
 .pop-up-right label {
@@ -2616,6 +2641,8 @@ li {
     font-weight: bold;
     margin-left: 8px;
 }
+.pop_up_add_to_cart_button{background: #009688; color: #fff;}
+.single-mage_tour .ui-widget .ui-widget{font-size: 0px;}
 
 .form-group label {
     text-align: right;
@@ -2706,4 +2733,9 @@ form.example::after {
     content: "";
     clear: both;
     display: table;
+}
+
+.hotel_details p{
+    font-style: italic;
+    font-size: 12px;
 }

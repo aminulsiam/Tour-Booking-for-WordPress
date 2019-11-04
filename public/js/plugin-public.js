@@ -4,7 +4,7 @@
 
 
         // selected hotel details show by selected options
-        $('.hotel').on('change', function () {
+        $('.hotel').on('change', function (e) {
             var $hotel = $(this).val();
             var $tour = $(this).data('id');
 
@@ -15,7 +15,7 @@
                 $('.hotel_details').addClass('display_hotel');
                 $('.hotel_details').removeClass('no_hotel');
 
-
+                //e.preventDefault();
 
                 $.ajax({
                     type: 'POST',
@@ -28,9 +28,13 @@
                     dataType: "text",
                     success: function (data) {
                         $(".hotel_details").html(data);
-                        
+                    },
+
+                    error: function (jqXHR, textStatus, errorThrown) {
+                        console.log(textStatus, errorThrown);
                     }
-                })
+
+                });
 
             }
         });//end selected options hotel room details
@@ -134,9 +138,6 @@
 
         });
 
-        $("#create-user").on("click", function (event) {
-            event.preventDefault();
-        });
 
         $("#create-user").click(function (event) {
             event.preventDefault();

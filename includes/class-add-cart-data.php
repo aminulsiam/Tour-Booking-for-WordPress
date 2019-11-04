@@ -83,12 +83,6 @@ class Tour_WotmCartCalculation {
 			
 			$reg_form_arr = maybe_unserialize( get_post_meta( $product_id, 'attendee_reg_form', true ) );
 			
-			/*$reg_form_arr = apply_filters( 'form_builder_data', array() );
-			
-			write_log( $reg_form_arr );
-			
-			exit();*/
-			
 			$cn = 0;
 			foreach ( $tour_hotel_room_cap as $cap ) {
 				
@@ -136,8 +130,6 @@ class Tour_WotmCartCalculation {
 				if ( $room_qty > 0 ) {
 					
 					$hotel[ $i ]['tour_id'] = stripslashes( strip_tags( $product_id ) );
-					//$per_ticket_price = $tour_hotel_room_price[ $i ];
-					//$net_ticket_price = $per_ticket_price * $room_qty;
 					
 					$hotel[ $i ]['hotel_id']   = stripslashes( strip_tags( $tour_hotel ) );
 					$hotel[ $i ]['room_name']  = stripslashes( strip_tags( $tour_hotel_room_name[ $i ] ) );

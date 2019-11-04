@@ -245,14 +245,17 @@ the_post();
 	?>
 
 </div>
+
+<script src="http://code.jquery.com/ui/1.11.0/jquery-ui.js"></script>
+
 <script type="text/javascript">
     jQuery('.add_to_cart').hide();
-    /*jQuery(".datepicker").datepicker({
+    jQuery(".datepicker").datepicker({
         dateFormat: 'yy-mm-dd',
         minDate: new Date(<?php _e( $tour_start_year ); ?>, <?php _e( $tour_start_month ); ?> -1, <?php _e( $tour_start_day ); ?>),
         maxDate: new Date(<?php _e( $tour_end_year ); ?>, <?php _e( $tour_end_month ); ?> -1, <?php _e(
 			$tour_end_day ); ?>)
-    });*/
+    });
 </script>
 <?php get_footer(); ?>
 

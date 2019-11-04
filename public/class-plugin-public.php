@@ -40,8 +40,17 @@ class Tour_Plugin_Public {
 		add_filter( 'single_template', array( $this, 'register_custom_single_template' ) );
 		add_filter( 'template_include', array( $this, 'register_custom_tax_template' ) );
 		
-		//hotel option selected by this wp ajax hook
-		add_action( 'wp_ajax_show_hotel_by_option_selected', array( $this, 'show_hotel_by_option_selected' ) );
+		//hotel option selected by this wp ajax hook for log in users
+		add_action( 'wp_ajax_show_hotel_by_option_selected', array(
+			$this,
+			'show_hotel_by_option_selected'
+		) );
+		
+		//hotel options selected by this wp ajax hook for non authentical users
+		add_action( 'wp_ajax_nopriv_show_hotel_by_option_selected', array(
+			$this,
+			'show_hotel_by_option_selected'
+		) );
 		
 	}
 	
@@ -203,7 +212,7 @@ class Tour_Plugin_Public {
                 <td colspan="2"><?php echo esc_html__( 'Total Person', 'woocommerce-tour-booking-manager' ); ?></td>
 
                 <td align="right">
-                    <input type="number" max="0" min="1" class="total_person" value="0" name="total_person" />
+                    <input type="number" max="0" min="1" class="total_person" value="0" name="total_person"/>
                 </td>
 
             </tr>
