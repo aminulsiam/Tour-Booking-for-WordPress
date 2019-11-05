@@ -279,7 +279,7 @@ class Woo_Tour_Meta {
 		$metabox_1 = array(
 			'meta_box_id'    => 'post_meta_box_1',
 			'meta_box_title' => __( 'Tour Booking Information', 'woocommerce-tour-booking-manager' ),
-			'screen'         => array( 'page', 'demo_post', 'mage_tour' ),
+			'screen'         => array( 'mage_tour' ),
 			'context'        => 'normal', // 'normal', 'side', and 'advanced'
 			'priority'       => 'high', // 'high', 'low'
 			'callback_args'  => array(),
@@ -300,7 +300,7 @@ class Woo_Tour_Meta {
 			'meta_box_id'    => 'post_meta_box_2',
 			'meta_box_title' => __( 'Pricing Setup', 'woocommerce-tour-booking-manager' ),
 			//'callback'       => '_meta_box_callback',
-			'screen'         => array( 'page', 'demo_post', 'mage_tour' ),
+			'screen'         => array( 'mage_tour' ),
 			'context'        => 'normal', // 'normal', 'side', and 'advanced'
 			'priority'       => 'high', // 'high', 'low'
 			'callback_args'  => array(),

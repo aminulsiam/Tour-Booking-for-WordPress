@@ -47,10 +47,8 @@ class Tour_WotmCartCalculation {
 	 *
 	 * @return float|int
 	 */
-	function get_tour_hotel_room_price( $hotel_id, $room_name, $room_qty ) {
+	function get_tour_hotel_room_price( $hotel_id, $room_name, $room_qty, $tour_duration ) {
 		$room_details = maybe_unserialize( get_term_meta( $hotel_id, 'hotel_room_details', true ) );
-		
-		$tour_duration = get_post_meta( $tour_id, 'tour_duration', true );
 		
 		$room_fare = 0;
 		foreach ( $room_details as $key => $val ) {
@@ -62,6 +60,8 @@ class Tour_WotmCartCalculation {
 		$total = ( $room_fare * $room_qty ) * $tour_duration;
 		
 		return $total;
+		
+		return ( $room_fare * $room_qty );
 		
 	}
 	
@@ -112,6 +112,8 @@ class Tour_WotmCartCalculation {
 			//Get the main price of hotel room
 			$price_source = get_post_meta( $product_id, 'tour_price_source', true );
 			
+			$tour_duration = get_post_meta( $product_id, 'tour_duration', true );
+			
 			if ( $price_source == 'tour' ) {
 				$room_fare = 0;
 				$count     = 0;
@@ -124,7 +126,7 @@ class Tour_WotmCartCalculation {
 				$room_fare = 0;
 				$count     = 0;
 				foreach ( $tour_hotel_room_name as $room_name ) {
-					$room_fare = ( $room_fare + $this->get_tour_hotel_room_price( $tour_hotel, $room_name, $tour_hotel_room_qty[ $count ] ) );
+					$room_fare = ( $room_fare + $this->get_tour_hotel_room_price( $tour_hotel, $room_name, $tour_hotel_room_qty[ $count ], $tour_duration ) );
 					$count ++;
 				}
 			}
