@@ -24,13 +24,18 @@ class Tour_WotmCartCalculation {
 	function get_tour_room_price( $tour_id, $room_name, $room_qty ) {
 		$room_details = maybe_unserialize( get_post_meta( $tour_id, 'hotel_room_details', true ) );
 		$room_fare    = 0;
+		
+		$tour_duration = get_post_meta( $tour_id, 'tour_duration', true );
+		
 		foreach ( $room_details as $key => $val ) {
 			if ( $val['room_type'] === $room_name ) {
 				$room_fare = $val['room_fare'];
 			}
 		}
 		
-		return ( $room_fare * $room_qty );
+		$total = ( $room_fare * $room_qty ) * $tour_duration;
+		
+		return $total;
 	}
 	
 	/**
@@ -45,6 +50,7 @@ class Tour_WotmCartCalculation {
 	function get_tour_hotel_room_price( $hotel_id, $room_name, $room_qty ) {
 		$room_details = maybe_unserialize( get_term_meta( $hotel_id, 'hotel_room_details', true ) );
 		
+		$tour_duration = get_post_meta( $tour_id, 'tour_duration', true );
 		
 		$room_fare = 0;
 		foreach ( $room_details as $key => $val ) {
@@ -53,7 +59,10 @@ class Tour_WotmCartCalculation {
 			}
 		}
 		
-		return ( $room_fare * $room_qty );
+		$total = ( $room_fare * $room_qty ) * $tour_duration;
+		
+		return $total;
+		
 	}
 	
 	/**
@@ -233,9 +242,10 @@ class Tour_WotmCartCalculation {
 				echo '<li>Hotel: ' . $term_arr->name . '</li>';
 			}
 			
+			$tour_duration = get_post_meta( $qrtid, 'tour_duration', true );
+			
 			foreach ( $tour_data as $hotel ) {
 				$term_arr = get_term_by( 'id', $hotel['hotel_id'], 'hotel_details' );
-				//$hotel_name = $term_arr->name;
 				?>
                 <li> <?php _e( 'Room: ' ); ?> <?php echo $hotel['room_name'] . ' (' . wc_price( $hotel['room_price'] ) . ' X ' . $hotel['room_qty'] . ' = ' . wc_price( $hotel['room_price'] * $hotel['room_qty'] ); ?>
                     )

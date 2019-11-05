@@ -23,39 +23,49 @@ the_post();
 			}
 			?>
         </div>
+        
+        <!-- Tour Title -->
         <section class="tour_title">
             <h1><?php the_title(); ?></h1>
         </section>
 
+       <!-- Tour Content -->
         <p><?php the_content(); ?></p>
+		
+		<?php
+        
+        //check more details form backend, if found this section will show else not show
+        
+		$day_details = maybe_unserialize( get_post_meta( $post->ID, 'more_details', true ) );
+		
+		if ( is_array( $day_details ) && sizeof( $day_details ) > 0 && ! empty( $day_details ) ) {
+			
+			?>
 
-        <section class="daywise_details">
-            <h6>
-				<?php echo esc_html__( 'More Details', 'woocommerce-tour-booking-manager' ); ?>
-            </h6>
-			<?php
-			$day_details = maybe_unserialize( get_post_meta( $post->ID, 'more_details', true ) );
-			
-			if ( ! is_array( $day_details ) ) {
-				$day_details = array();
-			}
-			
-			foreach ( $day_details as $day_detail ) {
-				?>
-                <button class="accordion">
-					<?php echo esc_html( ucfirst( $day_detail['details_topic'] ) ); ?>
-                </button>
-                <div class="panel">
-                    <p><?php echo esc_html( ucfirst( $day_detail['details'] ) ); ?></p>
-                </div>
-			<?php } ?>
-        </section>
+            <section class="daywise_details">
+                <h6>
+					<?php echo esc_html__( 'More Details', 'woocommerce-tour-booking-manager' ); ?>
+                </h6>
+				<?php
+				
+				foreach ( $day_details as $day_detail ) {
+					?>
+                    <button class="accordion">
+						<?php echo esc_html( ucfirst( $day_detail['details_topic'] ) ); ?>
+                    </button>
+                    <div class="panel">
+                        <p><?php echo esc_html( ucfirst( $day_detail['details'] ) ); ?></p>
+                    </div>
+				<?php } ?>
+            </section>
+		
+		<?php } ?>
     </div>
 
     <div class="tour-right-content">
 		
 		<?php
-		if ( isset( $_POST['submit_tour'] ) ) {
+		/*if ( isset( $_POST['submit_tour'] ) ) {
 			$tour_id               = get_the_id();
 			$tour_date             = $_POST['tour_date'];
 			$tour_hotel            = $_POST['tour_hotel'];
@@ -82,7 +92,7 @@ the_post();
 			}
 			
 			echo $total_price;
-		}
+		}*/
 		?>
 		
 		<?php
@@ -254,15 +264,16 @@ the_post();
     var $currentdate = new Date();
 
     jQuery(".datepicker").datepicker({
-        
+
         dateFormat: 'yy-mm-dd',
         minDate: new Date(<?php _e( $tour_start_year ); ?>, <?php _e( $tour_start_month ); ?> -1, <?php _e( $tour_start_day ); ?>),
 
         maxDate: new Date(<?php _e( $tour_end_year ); ?>, <?php _e( $tour_end_month ); ?> -1, <?php _e(
-			$tour_end_day ); ?>) });
+			$tour_end_day ); ?>)
+    });
 
     jQuery('.hasDatepicker').last().datepicker('refresh');
-    
+
 </script>
 <?php get_footer(); ?>
 
