@@ -67,7 +67,9 @@ if ( ! class_exists( 'Tour_Booking_Helper' ) ) {
                                 <label for=""><?php echo esc_html__( 'Tour Date :  ',
 										'woocommerce-tour-booking-manager' ); ?></label>
                                 <input type="text" class="datepicker" autocomplete="off" name="tour_date"
-                                       required/>
+                                       placeholder="Enter your likable tour data" required/>
+                                <span class="description"><?php echo esc_html__( 'Enter your likable tour date', 'woocommerce-tour-booking-manager' ); ?></span>
+
                             </div>
 							<?php
 						} elseif ( "fixed" == $tour_type ) {
@@ -245,7 +247,7 @@ if ( ! class_exists( 'Tour_Booking_Helper' ) ) {
                     </section>
                 </form>
             </div>
-
+            <script src="http://code.jquery.com/ui/1.11.0/jquery-ui.js"></script>
             <script type="text/javascript">
 
                 jQuery('.total_person').on('change', function () {

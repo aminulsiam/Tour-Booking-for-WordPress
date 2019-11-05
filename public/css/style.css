@@ -1621,16 +1621,18 @@ h4.mep-cart-table-title {
     display: block;
     overflow: hidden;
 }
-.tour-left-content {
-        width: 60%;
-        float: left;
-        margin-right: 5px;
-    }
 
- .tour-right-content {
-        width: 30%;
-        float: right;
- }
+.tour-left-content {
+    width: 60%;
+    float: left;
+    margin-right: 5px;
+}
+
+.tour-right-content {
+    width: 30%;
+    float: right;
+}
+
 /*
   ##Device = Desktops
   ##Screen = 1281px to higher resolution desktops
@@ -1960,17 +1962,21 @@ h4.mep-cart-table-title {
 
 .tour_title h1 {
     margin-top: 20px;
-    font-family: "Roboto",sans-serif;
+    font-family: "Roboto", sans-serif;
     font-size: 22px;
 }
-.tour_destination h3{
-    font-family: "Roboto",sans-serif;
-    font-size: 18px;}
-.tour-right-content{
 
-font-size: 14px;
+.tour_destination h3 {
+    font-family: "Roboto", sans-serif;
+    font-size: 18px;
+}
+
+.tour-right-content {
+
+    font-size: 14px;
 
 }
+
 .hotel_options {
     text-align: center;
 }
@@ -2528,7 +2534,7 @@ div#users-contain table td, div#users-contain table th {
     color: #009688;
     font-weight: bold;
     margin-top: 17px;
-    font-family: "Roboto",sans-serif
+    font-family: "Roboto", sans-serif
 }
 
 .pop-up-left h6 {
@@ -2536,7 +2542,7 @@ div#users-contain table td, div#users-contain table th {
     text-align: center;
     padding: 10px 5px;
     color: #000;
-    font-family: "Roboto",sans-serif
+    font-family: "Roboto", sans-serif
 }
 
 .pop-up-left span {
@@ -2633,7 +2639,12 @@ li {
     color: #009688;
     font-weight: bold;
     margin-top: 17px;
-    font-family: "Roboto",sans-serif
+    font-family: "Roboto", sans-serif
+}
+
+.pop-up-right .description {
+    font-style: italic;
+    font-size: 12px;
 }
 
 .pop-up-right label {
@@ -2641,8 +2652,15 @@ li {
     font-weight: bold;
     margin-left: 8px;
 }
-.pop_up_add_to_cart_button{background: #009688; color: #fff;}
-.single-mage_tour .ui-widget .ui-widget{font-size: 0px;}
+
+.pop_up_add_to_cart_button {
+    background: #009688;
+    color: #fff;
+}
+
+.single-mage_tour .ui-widget .ui-widget {
+    font-size: 0px;
+}
 
 .form-group label {
     text-align: right;
@@ -2735,7 +2753,7 @@ form.example::after {
     display: table;
 }
 
-.hotel_details p{
+.hotel_details p {
     font-style: italic;
     font-size: 12px;
 }

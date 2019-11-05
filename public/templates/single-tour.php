@@ -250,12 +250,19 @@ the_post();
 
 <script type="text/javascript">
     jQuery('.add_to_cart').hide();
+
+    var $currentdate = new Date();
+
     jQuery(".datepicker").datepicker({
+        
         dateFormat: 'yy-mm-dd',
         minDate: new Date(<?php _e( $tour_start_year ); ?>, <?php _e( $tour_start_month ); ?> -1, <?php _e( $tour_start_day ); ?>),
+
         maxDate: new Date(<?php _e( $tour_end_year ); ?>, <?php _e( $tour_end_month ); ?> -1, <?php _e(
-			$tour_end_day ); ?>)
-    });
+			$tour_end_day ); ?>) });
+
+    jQuery('.hasDatepicker').last().datepicker('refresh');
+    
 </script>
 <?php get_footer(); ?>
 

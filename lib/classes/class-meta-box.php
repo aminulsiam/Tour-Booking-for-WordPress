@@ -206,7 +206,10 @@ if ( ! class_exists( 'AddMetaBox' ) ) {
                                         <h1 id="<?php echo $sectionIndex; ?>"
                                             class="section-title"><?php _e( $title ); ?></h1>
                                         <p class="description"><?php _e( $des ); ?></p>
-
+										
+										<?php do_action( 'tour_before_content_table_meta_box',
+											$this->get_post_id() ); ?>
+                                        
                                         <table class="form-table">
                                             <tbody>
 											
