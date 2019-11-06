@@ -34,7 +34,7 @@ class Tour_Plugin_Admin {
 	/**
 	 * @param $post_id
 	 */
-	public function whbm_booking_info_trash( $post_id ) {
+	public function wtbm_booking_info_trash( $post_id ) {
 		$post_type   = get_post_type( $post_id );
 		$post_status = get_post_status( $post_id );
 		if ( $post_type == 'shop_order' ) {
@@ -45,7 +45,7 @@ class Tour_Plugin_Admin {
 	/**
 	 * @param $post_id
 	 */
-	public function whbm_booking_info_untrash( $post_id ) {
+	public function wtbm_booking_info_untrash( $post_id ) {
 		$post_type   = get_post_type( $post_id );
 		$post_status = get_post_status( $post_id );
 		if ( $post_type == 'shop_order' ) {
