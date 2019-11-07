@@ -212,7 +212,9 @@ class Tour_Plugin_Public {
                 <td colspan="2"><?php echo esc_html__( 'Total Person', 'woocommerce-tour-booking-manager' ); ?></td>
 
                 <td align="right">
-                    <input type="number" max="0" min="1" class="total_person" value="0" name="total_person"/>
+                    <input type="number" max="0" min="0" value="0" class="total_person" name="total_person"/>
+
+                    <span class="total_person_show_error"></span>
                 </td>
 
             </tr>

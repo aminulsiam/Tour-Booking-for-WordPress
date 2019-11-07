@@ -197,8 +197,10 @@ if ( ! class_exists( 'Tour_Booking_Helper' ) ) {
 	                                            'woocommerce-tour-booking-manager' ); ?></td>
 
                                         <td align="right">
-                                            <input type="number" required min="1" max="0" class="total_person"
-                                                   value="1" name="total_person">
+                                            <input type="number" min="0" max="0" class="total_person"
+                                                   name="total_person" value="0">
+                                            
+                                            <span class="total_person_show_error"></span>
                                         </td>
                                     </tr>
 
@@ -253,6 +255,7 @@ if ( ! class_exists( 'Tour_Booking_Helper' ) ) {
                 jQuery('.total_person').on('change', function () {
                     var inputs = jQuery(this).val() || 0;
                     var input = parseInt(inputs);
+
                     var children = jQuery('.form > div').length || 0;
 
                     if (input < children) {
@@ -267,6 +270,13 @@ if ( ! class_exists( 'Tour_Booking_Helper' ) ) {
                                 .html('<?php do_action( 'attendee_form_builder', get_the_id() ); ?>')
                         );
                     }
+
+
+                    if (input > 0) {
+                        jQuery('.total_person').removeClass("total_person_error");
+                        jQuery('.hotel_details').find('.total_person_show_error').find('p').hide();
+                    }
+
 
                 });
 

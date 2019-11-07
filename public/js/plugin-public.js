@@ -2,7 +2,6 @@
 
     $(document).ready(function () {
 
-
         // selected hotel details show by selected options
         $('.hotel').on('change', function (e) {
             var $hotel = $(this).val();
@@ -15,7 +14,6 @@
                 $('.hotel_details').addClass('display_hotel');
                 $('.hotel_details').removeClass('no_hotel');
 
-                //e.preventDefault();
 
                 $.ajax({
                     type: 'POST',
@@ -61,6 +59,43 @@
         //by default add to cart button hide in pop up
         $(".hotel_details").find('.pop_up_add_to_cart_button').hide();
 
+
+        $('.pop_up_add_to_cart_button').one('click', function () {
+
+
+            var total_person = $('.hotel_details').find('.total_person').val();
+
+            if (parseInt(total_person) == 0) {
+
+                $('.total_person').addClass("total_person_error");
+
+                $('.hotel_details').find('.total_person_show_error').append('<p class="error_text">Please add at least 1 traveller</p>');
+
+                return false;
+
+            }
+
+        });
+
+
+        //
+        $('form').submit(function () {
+
+            var total_person = $('.hotel_details').find('.total_person').val();
+
+            if (total_person > 0) {
+                return true;
+            }
+
+            $('.total_person').addClass("total_person_error");
+
+             $('.hotel_details').find('.total_person_show_error').append('<p class="error_text">Please add at least 1 traveller</p>');
+
+            return false;
+
+        });
+
+
         //total price fare and max person calculation
         $(".hotel_details").on("change", ".qty", function () {
             var total_room_price = 0;
@@ -78,7 +113,7 @@
 
                 $(".total").text(total_room_price);
 
-                $(".total_person").attr({"value": total_person});
+
                 $(".total_person").attr({"max": total_person});
 
 

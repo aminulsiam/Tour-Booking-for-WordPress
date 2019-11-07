@@ -2758,3 +2758,17 @@ form.example::after {
     font-style: italic;
     font-size: 12px;
 }
+
+.hotel_details .total_person_error {
+    border: 2px solid red;
+}
+
+.hotel_details .error_text {
+    display: inline-block;
+    font-style: italic;
+    color: red;
+}
+
+.hotel_details .display_none_error {
+    display: none;
+}
