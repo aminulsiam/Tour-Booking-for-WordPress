@@ -141,6 +141,7 @@ class Tour_Plugin_Admin {
 	 *
 	 *
 	 * Get Order Itemdata value by Item id
+	 *
 	 * @param $item_id
 	 * @param $key
 	 *
@@ -367,6 +368,7 @@ class Tour_Plugin_Admin {
 		require_once PLUGIN_DIR . 'admin/class/class-create-tax.php';
 		require_once PLUGIN_DIR . 'admin/class/class-meta-box.php';
 		require_once PLUGIN_DIR . 'admin/class/class-tax-meta.php';
+		require_once PLUGIN_DIR . 'admin/class/class-export.php';
 	}
 	
 	
