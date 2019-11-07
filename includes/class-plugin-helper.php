@@ -239,9 +239,7 @@ if ( ! class_exists( 'Tour_Booking_Helper' ) ) {
                                                 echo esc_html__( 'Add To Cart',
 	                                                'woocommerce-tour-booking-manager' ); ?>
                                             </button>
-                                            
                                         </td>
-
                                     </tr>
 
                                 </table>
@@ -249,7 +247,9 @@ if ( ! class_exists( 'Tour_Booking_Helper' ) ) {
                     </section>
                 </form>
             </div>
-            <script src="http://code.jquery.com/ui/1.11.0/jquery-ui.js"></script>
+            
+<!--            <script src="http://code.jquery.com/ui/1.11.0/jquery-ui.js"></script>-->
+            
             <script type="text/javascript">
 
                 jQuery('.total_person').on('change', function () {
@@ -271,18 +271,14 @@ if ( ! class_exists( 'Tour_Booking_Helper' ) ) {
                         );
                     }
 
-
                     if (input > 0) {
                         jQuery('.total_person').removeClass("total_person_error");
                         jQuery('.hotel_details').find('.total_person_show_error').find('p').hide();
                     }
-
-
+                    
                 });
-
-
+                
             </script>
-			
 			<?php
 		}
 		}//end method hotel_details

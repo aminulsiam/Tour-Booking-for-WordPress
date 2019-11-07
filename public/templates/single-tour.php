@@ -23,19 +23,19 @@ the_post();
 			}
 			?>
         </div>
-        
+
         <!-- Tour Title -->
         <section class="tour_title">
             <h1><?php the_title(); ?></h1>
         </section>
 
-       <!-- Tour Content -->
+        <!-- Tour Content -->
         <p><?php the_content(); ?></p>
 		
 		<?php
-        
-        //check more details form backend, if found this section will show else not show
-        
+		
+		//check more details form backend, if found this section will show else not show
+		
 		$day_details = maybe_unserialize( get_post_meta( $post->ID, 'more_details', true ) );
 		
 		if ( is_array( $day_details ) && sizeof( $day_details ) > 0 && ! empty( $day_details ) ) {
@@ -256,12 +256,9 @@ the_post();
 
 </div>
 
-<script src="http://code.jquery.com/ui/1.11.0/jquery-ui.js"></script>
 
 <script type="text/javascript">
     jQuery('.add_to_cart').hide();
-
-    var $currentdate = new Date();
 
     jQuery(".datepicker").datepicker({
 

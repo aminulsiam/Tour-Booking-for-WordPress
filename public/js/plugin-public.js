@@ -62,7 +62,6 @@
 
         $('.pop_up_add_to_cart_button').one('click', function () {
 
-
             var total_person = $('.hotel_details').find('.total_person').val();
 
             if (parseInt(total_person) == 0) {
@@ -71,27 +70,12 @@
 
                 $('.hotel_details').find('.total_person_show_error').append('<p class="error_text">Please add at least 1 traveller</p>');
 
+                // $("form").submit(function (e) {
+                //     e.preventDefault();
+                // });
+
                 return false;
-
             }
-
-        });
-
-
-        //
-        $('form').submit(function () {
-
-            var total_person = $('.hotel_details').find('.total_person').val();
-
-            if (total_person > 0) {
-                return true;
-            }
-
-            $('.total_person').addClass("total_person_error");
-
-             $('.hotel_details').find('.total_person_show_error').append('<p class="error_text">Please add at least 1 traveller</p>');
-
-            return false;
 
         });
 

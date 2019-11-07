@@ -63,6 +63,9 @@ class Tour_Plugin_Public {
 	 * Enqueue public styles
 	 */
 	public function enqueue_styles() {
+		
+		wp_enqueue_style( 'tour-jquery-ui-css', PLUGIN_URL . 'public/css/jquery-ui.css', array(), '', 'all' );
+		
 		wp_enqueue_style( 'mage-public-css', PLUGIN_URL . 'public/css/style.css', array(), time(),
 			'all' );
 		
@@ -73,26 +76,24 @@ class Tour_Plugin_Public {
 		.4/fotorama.css', array(), time(), 'all' );
 		
 		
-		wp_enqueue_style( 'tour-jquery-ui', PLUGIN_URL . 'public/css/jquery-ui.css', array(), time(),
-			'all' );
-		
-		
 	}//end method enqueue_styles
+	
 	
 	/**
 	 * This function is loaded scripts
 	 */
 	public function enqueue_scripts() {
 		
-		wp_enqueue_script( 'magnific-pop-up-js', PLUGIN_URL . 'public/js/magnific.js',
-			array( 'jquery' ), time(), true );
+		wp_enqueue_script( 'jquery' );
+		wp_enqueue_script( 'jquery-ui-core' );
+		wp_enqueue_script( 'jquery-ui-datepicker' );
+		wp_enqueue_script( 'jquery-ui-sortable' );
 		
-		wp_enqueue_script( 'tour-datepicker-js', '//code.jquery.com/ui/1.12.1/jquery-ui.js',
+		wp_enqueue_script( 'magnific-pop-up-js', PLUGIN_URL . 'public/js/magnific.js',
 			array( 'jquery' ), time(), true );
 		
 		wp_enqueue_script( 'fotoroma-js', '//cdnjs.cloudflare.com/ajax/libs/fotorama/4.6
 		.4/fotorama.js', array( 'jquery', 'tour-public-js' ), time(), true );
-		
 		
 	}//end method enqueue_scripts
 	
