@@ -60,7 +60,7 @@
         $(".hotel_details").find('.pop_up_add_to_cart_button').hide();
 
 
-        $('.pop_up_add_to_cart_button').one('click', function () {
+        $('.hotel_details').on('click', '.pop_up_add_to_cart_button', function (e) {
 
             var total_person = $('.hotel_details').find('.total_person').val();
 
@@ -72,9 +72,25 @@
 
                 // $("form").submit(function (e) {
                 //     e.preventDefault();
+                //     $(this).unbind('.total_person');
                 // });
 
                 return false;
+            }
+
+        });
+
+
+        $('.hotel_details').on('change', '.total_person', function () {
+            var inputs = jQuery(this).val() || 0;
+            var input = parseInt(inputs);
+
+            if (input > 0) {
+                jQuery('.total_person').removeClass("total_person_error");
+                jQuery('.hotel_details').find('.total_person_show_error').find('p').hide();
+            }else{
+                jQuery('.total_person').addClass("total_person_error");
+                jQuery('.hotel_details').find('.total_person_show_error').find('p').show();
             }
 
         });
@@ -92,21 +108,17 @@
                 total_room_price = parseInt(total_room_price + ($(this).val() * room_val || 0));
                 total_person = parseInt(total_person + ($(this).val() * person_val || 0));
 
-
                 $(".total").text(total_room_price);
 
                 $(".total").text(total_room_price);
-
 
                 $(".total_person").attr({"max": total_person});
-
 
                 if (total_room_price > 0) {
                     $('.pop_up_add_to_cart_button').show();
                 } else {
                     $('.pop_up_add_to_cart_button').hide();
                 }
-
 
             });//end total fare calculation and max person allowed
 
@@ -162,7 +174,6 @@
             event.preventDefault();
         });
 
-
         // search autocomplete
         $(".search").autocomplete({
             source: woo_tour.pakages,
@@ -172,7 +183,6 @@
         $('.hotel_details').on('mousewheel', '.total_person', function () {
             return false;
         });
-
 
     });
 }(jQuery));

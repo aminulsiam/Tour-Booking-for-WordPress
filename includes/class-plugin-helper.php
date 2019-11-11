@@ -58,7 +58,7 @@ if ( ! class_exists( 'Tour_Booking_Helper' ) ) {
                     </section>
 
                     <section class="pop-up-right">
-						
+                        
 						<?php
 						
 						if ( "flexible" == $tour_type ) {
@@ -248,8 +248,6 @@ if ( ! class_exists( 'Tour_Booking_Helper' ) ) {
                 </form>
             </div>
             
-<!--            <script src="http://code.jquery.com/ui/1.11.0/jquery-ui.js"></script>-->
-            
             <script type="text/javascript">
 
                 jQuery('.total_person').on('change', function () {
@@ -269,11 +267,6 @@ if ( ! class_exists( 'Tour_Booking_Helper' ) ) {
                                 .attr("id", "newDiv" + i)
                                 .html('<?php do_action( 'attendee_form_builder', get_the_id() ); ?>')
                         );
-                    }
-
-                    if (input > 0) {
-                        jQuery('.total_person').removeClass("total_person_error");
-                        jQuery('.hotel_details').find('.total_person_show_error').find('p').hide();
                     }
                     
                 });
@@ -404,7 +397,7 @@ if ( ! class_exists( 'Tour_Booking_Helper' ) ) {
 			}//end foreach
 			wp_reset_postdata();
 			
-		}//end method seard_and_tour_pakage
+		}//end method search_and_all_tour_pakage
 		
 	}//end class Tour_Booking_Helper
 }//end if condition

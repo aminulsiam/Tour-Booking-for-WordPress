@@ -17,7 +17,10 @@ the_post();
 		
 		?>
         <div class="fotorama" data-autoplay="5000" data-allowfullscreen="true" data-width="100%" data-height="auto">
+			
 			<?php
+			the_post_thumbnail();
+			
 			foreach ( $gallary_images as $images ) {
 				echo wp_get_attachment_image( $images, array( 1000, 800 ) );
 			}
@@ -41,7 +44,6 @@ the_post();
 		if ( is_array( $day_details ) && sizeof( $day_details ) > 0 && ! empty( $day_details ) ) {
 			
 			?>
-
             <section class="daywise_details">
                 <h6>
 					<?php echo esc_html__( 'More Details', 'woocommerce-tour-booking-manager' ); ?>
@@ -63,37 +65,6 @@ the_post();
     </div>
 
     <div class="tour-right-content">
-		
-		<?php
-		/*if ( isset( $_POST['submit_tour'] ) ) {
-			$tour_id               = get_the_id();
-			$tour_date             = $_POST['tour_date'];
-			$tour_hotel            = $_POST['tour_hotel'];
-			$tour_hotel_room_name  = $_POST['room_name'];
-			$tour_hotel_room_price = $_POST['room_price'];
-			$tour_hotel_room_qty   = $_POST['room_qty'];
-			
-			$total_room  = count( $tour_hotel_room_name );
-			$total_price = 0;
-			for ( $i = 0; $i < $total_room; $i ++ ) {
-				$room_qty = $tour_hotel_room_qty[ $i ];
-				if ( $room_qty > 0 ) {
-					$hotel[ $i ]['tour_id'] = stripslashes( strip_tags( $tour_id ) );
-					
-					$per_ticket_price = $tour_hotel_room_price[ $i ];
-					$net_ticket_price = $per_ticket_price * $room_qty;
-					
-					$hotel[ $i ]['hotel_id']   = stripslashes( strip_tags( $tour_hotel ) );
-					$hotel[ $i ]['room_name']  = stripslashes( strip_tags( $tour_hotel_room_name[ $i ] ) );
-					$hotel[ $i ]['room_price'] = stripslashes( strip_tags( $tour_hotel_room_price[ $i ] ) );
-					$hotel[ $i ]['room_qty']   = stripslashes( strip_tags( $tour_hotel_room_qty[ $i ] ) );
-					$total_price               = $total_price + $net_ticket_price;
-				}
-			}
-			
-			echo $total_price;
-		}*/
-		?>
 		
 		<?php
 		
@@ -158,7 +129,6 @@ the_post();
 						?>
                     </div>
 
-
                     <div class="validities">
 						
 						<?php
@@ -201,7 +171,6 @@ the_post();
 						$hotel_room_fares = get_post_meta( $post->ID, 'hotel_room_details',
 							true );
 						
-						
 						$get_hotel_fares = maybe_unserialize( $hotel_room_fares );
 						
 						if ( ! is_array( $get_hotel_fares ) ) {
@@ -233,9 +202,7 @@ the_post();
                         </div>
                     </div>
 					
-					<?php
-					echo Tour_Booking_Helper::hotel_details( $get_hotel_details );
-					?>
+					<?php echo Tour_Booking_Helper::hotel_details( $get_hotel_details ); ?>
 
                 </div>
             </div>
@@ -256,7 +223,6 @@ the_post();
 
 </div>
 
-
 <script type="text/javascript">
     jQuery('.add_to_cart').hide();
 
@@ -270,7 +236,7 @@ the_post();
     });
 
     jQuery('.hasDatepicker').last().datepicker('refresh');
-
+    
 </script>
 <?php get_footer(); ?>
 
