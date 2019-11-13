@@ -12,13 +12,13 @@ if ( ! defined( 'ABSPATH' ) ) {
  * Class Woo_Tour_Meta
  */
 class Woo_Tour_Meta {
-
+	
 	public function __construct() {
 		$this->metabox();
-
+		
 		add_action( 'save_post', array( $this, 'update_price_of_tour_pakage' ) );
 	}
-
+	
 	/**
 	 * @param $post_id
 	 */
@@ -34,30 +34,30 @@ class Woo_Tour_Meta {
 			$update_price = update_post_meta( $post_id, '_price', 0 );
 		}
 	}//end method update_price_of_ticket
-
+	
 	/**
 	 *
 	 */
 	public function metabox() {
-
+		
 		$page_1_options = array(
-
+			
 			'page_nav' => __( '<i class="far fa-dot-circle"></i> Nav Title 1', 'woocommerce-tour-booking-manager' ),
 			'priority' => 10,
 			'sections' => array(
-
+				
 				'section_0' => array(
 					'title'       => __( '', 'woocommerce-tour-booking-manager' ),
 					'description' => __( '', 'woocommerce-tour-booking-manager' ),
 					'options'     => array(
-
+						
 						array(
 							'id'      => 'tour_gallary_image',
 							'title'   => __( 'Tour Gallary Images', 'woocommerce-tour-booking-manager' ),
 							'details' => __( 'Please upload images for this tour', 'woocommerce-tour-booking-manager' ),
 							'type'    => 'media_multi',
 						),
-
+						
 						array(
 							'id'          => 'departure_point',
 							'title'       => __( 'Departure Point Name', 'woocommerce-tour-booking-manager' ),
@@ -66,8 +66,8 @@ class Woo_Tour_Meta {
 							'default'     => '',
 							'placeholder' => __( 'Enter your Departure point Name', 'woocommerce-tour-booking-manager' ),
 						),
-
-
+						
+						
 						array(
 							'id'      => 'google_map_display',
 							'title'   => __( 'Display Google Map', 'woocommerce-tour-booking-manager' ),
@@ -79,7 +79,7 @@ class Woo_Tour_Meta {
 								'on' => __( '', 'woocommerce-tour-booking-manager' ),
 							),
 						),
-
+						
 						array(
 							'id'      => 'tour_offer_type',
 							'title'   => __( 'Tour Type', 'woocommerce-tour-booking-manager' ),
@@ -93,17 +93,16 @@ class Woo_Tour_Meta {
 								'fixed'    => __( 'Fixed', 'woocommerce-tour-booking-manager' )
 							),
 						),
-
-
+						
 						array(
-							'id'          => 'tour_duration',
-							'title'       => __( 'Tour Duration', 'woocommerce-tour-booking-manager' ),
-							'details'     => __( 'Write your tour duration', 'woocommerce-tour-booking-manager' ),
-							'type'        => 'text',
-							'default'     => '',
-							'placeholder' => __( 'Enter your tour duration', 'woocommerce-tour-booking-manager' ),
+							'id'      => 'tour_duration',
+							'title'   => __( 'Tour Duration', 'woocommerce-tour-booking-manager' ),
+							'details' => __( 'Write your tour duration days, like What is the number of nights of your tour. Example : 3 ', 'woocommerce-tour-booking-manager' ),
+							'type'    => 'number',
+							'min' => 1,
+							'max' => 30,
 						),
-
+						
 						array(
 							'id'          => 'start_date',
 							'title'       => __( 'Tour Start Date', 'woocommerce-tour-booking-manager' ),
@@ -113,8 +112,8 @@ class Woo_Tour_Meta {
 							'default'     => '', // today date
 							'value'       => '', // today date
 							'type'        => 'datepicker',
-
 						),
+						
 						array(
 							'id'          => 'end_date',
 							'title'       => __( 'Tour end date', 'woocommerce-tour-booking-manager' ),
@@ -124,10 +123,9 @@ class Woo_Tour_Meta {
 							'default'     => '', // today date
 							'value'       => '', // today date
 							'type'        => 'datepicker',
-
+						
 						),
-
-
+						
 						array(
 							'id'          => 'tour_daywise_details',
 							'title'       => __( 'Tour Daywise Details', '' ),
@@ -137,27 +135,26 @@ class Woo_Tour_Meta {
 							'collapsible' => true,
 							'sortable'    => false,
 							'title_field' => 'day_title',
-
+							
 							'fields' => array(
-
+								
 								array(
 									'type'        => 'text',
 									'item_id'     => 'day_title',
 									'name'        => 'Title',
 									'placeholder' => "hello"
 								),
-
+								
 								array(
 									'type'        => 'textarea',
 									'item_id'     => 'day_details',
 									'name'        => 'Day Details',
 									'placeholder' => "hello"
 								),
-
+							
 							)
 						),
-
-
+						
 						array(
 							'id'          => 'more_details',
 							'title'       => __( 'Tour More Details', '' ),
@@ -168,9 +165,9 @@ class Woo_Tour_Meta {
 							'collapsible' => true,
 							'sortable'    => false,
 							'title_field' => 'details_topic',
-
+							
 							'fields' => array(
-
+								
 								array(
 									'type'    => 'text',
 									'item_id' => 'details_topic',
@@ -183,30 +180,28 @@ class Woo_Tour_Meta {
 									'name'    => 'Details',
 									'default' => ''
 								),
-
+							
 							)
 						),
-
-
 					)
 				),
-
+			
 			),
 		);
-
-
+		
+		
 		$meta_1_options = array(
-
+			
 			'page_nav' => __( '<i class="far fa-dot-circle"></i> Nav Title 1', 'woocommerce-tour-booking-manager' ),
 			'priority' => 10,
 			'sections' => array(
-
+				
 				'section_0' => array(
 					'title'       => __( '', 'woocommerce-tour-booking-manager' ),
 					'description' => __( '', 'woocommerce-tour-booking-manager' ),
 					'options'     => array(
-
-
+						
+						
 						array(
 							'id'      => 'tour_price_source',
 							'title'   => __( 'Tour Price Source', 'woocommerce-tour-booking-manager' ),
@@ -217,11 +212,11 @@ class Woo_Tour_Meta {
 							'args'    => array(
 								'hotel' => __( 'Hotel', 'woocommerce-tour-booking-manager' ),
 								'tour'  => __( 'Tour', 'woocommerce-tour-booking-manager' )
-
+							
 							),
 						),
-
-
+						
+						
 						array(
 							'id'          => 'hotel_room_details',
 							'title'       => __( 'Tour Pricing', '' ),
@@ -243,39 +238,39 @@ class Woo_Tour_Meta {
 								)
 							)
 						),
-
-
+					
+					
 					)
 				),
-
+			
 			),
 		);
-
-
+		
+		
 		$page_2_options = array(
-
+			
 			'page_nav' => __( '<i class="fas fa-cog"></i> Nav Title 2', 'woocommerce-tour-booking-manager' ),
 			'priority' => 10,
 			'sections' => array(),
 		);
-
-
+		
+		
 		$page_3_options = array(
-
+			
 			'page_nav' => __( '<i class="far fa-bell"></i> Nav Title 3', 'woocommerce-tour-booking-manager' ),
 			'priority' => 10,
 			'sections' => array(),
 		);
-
-
+		
+		
 		$page_4_options = array(
-
+			
 			'page_nav' => __( '<i class="fas fa-bomb"></i> Nav Title 4', 'woocommerce-tour-booking-manager' ),
 			'priority' => 10,
 			'sections' => array(),
 		);
-
-
+		
+		
 		$metabox_1 = array(
 			'meta_box_id'    => 'post_meta_box_1',
 			'meta_box_title' => __( 'Tour Booking Information', 'woocommerce-tour-booking-manager' ),
@@ -291,11 +286,11 @@ class Woo_Tour_Meta {
 				'panelGroup-2' => $page_2_options,
 				'panelGroup-3' => $page_3_options,
 				'panelGroup-4' => $page_4_options,
-
+			
 			),
 		);
-
-
+		
+		
 		$pricing_setup = array(
 			'meta_box_id'    => 'post_meta_box_2',
 			'meta_box_title' => __( 'Pricing Setup', 'woocommerce-tour-booking-manager' ),
@@ -312,14 +307,14 @@ class Woo_Tour_Meta {
 				'panelGroup-2' => $page_2_options,
 				'panelGroup-3' => $page_3_options,
 				'panelGroup-4' => $page_4_options,
-
+			
 			),
 		);
-
-
+		
+		
 		$AddMenuPage1 = new AddMetaBox( $metabox_1 );
 		$AddMenuPage2 = new AddMetaBox( $pricing_setup );
-
+		
 	}//end method metabox
 }
 

@@ -341,20 +341,6 @@ class Tour_Plugin_Admin {
 		
 		wp_enqueue_script( 'jquery-ui-sortable' );
 		
-		wp_enqueue_style( 'wp-color-picker' );
-		
-		wp_enqueue_script( 'wp-color-picker' );
-		
-		wp_enqueue_script( 'magepeople-options-framework', plugins_url( 'assets/js/pickplugins-options-framework.js', __FILE__ ), array( 'jquery' ) );
-		
-		wp_localize_script( 'PickpluginsOptionsFramework', 'PickpluginsOptionsFramework_ajax', array( 'PickpluginsOptionsFramework_ajaxurl' => admin_url( 'admin-ajax.php' ) ) );
-		
-		wp_enqueue_script( 'select2.min', plugins_url( 'assets/js/select2.min.js', __FILE__ ), array( 'jquery' ) );
-		
-		wp_enqueue_script( 'codemirror', PLUGIN_URL . 'admin/assets/js/codemirror.min.js', array( 'jquery' ), null, false );
-		
-		wp_enqueue_script( 'form-field-dependency', plugins_url( 'assets/js/form-field-dependency.js', __FILE__ ), array( 'jquery' ), null, false );
-		
 		wp_enqueue_script( 'mage-plugin-js', PLUGIN_URL . 'admin/js/plugin-admin.js', array(
 			'jquery',
 			'jquery-ui-core',
@@ -368,7 +354,6 @@ class Tour_Plugin_Admin {
 		require_once PLUGIN_DIR . 'admin/class/class-create-tax.php';
 		require_once PLUGIN_DIR . 'admin/class/class-meta-box.php';
 		require_once PLUGIN_DIR . 'admin/class/class-tax-meta.php';
-		require_once PLUGIN_DIR . 'admin/class/class-export.php';
 	}
 	
 	

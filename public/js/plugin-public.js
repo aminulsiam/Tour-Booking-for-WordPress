@@ -14,7 +14,6 @@
                 $('.hotel_details').addClass('display_hotel');
                 $('.hotel_details').removeClass('no_hotel');
 
-
                 $.ajax({
                     type: 'POST',
                     url: woo_tour.ajaxurl,

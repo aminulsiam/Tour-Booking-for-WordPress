@@ -19,24 +19,6 @@ class Tour_Plugin_Public {
 		add_action( 'wp_enqueue_scripts', array( $this, 'enqueue_styles' ) );
 		add_action( 'wp_enqueue_scripts', array( $this, 'enqueue_scripts' ) );
 		
-		/**
-		 * For mandatory js and css we are using closure function.
-		 * If anyone try to remove this hook by remove action this is not possible for closure function.
-		 * For mandatory js and css we are preferred closure function
-		 */
-		add_action( 'wp_enqueue_scripts', function () {
-			
-			wp_enqueue_script( 'tour-public-js', PLUGIN_URL . 'public/js/plugin-public.js', array(
-				'jquery'
-			), time(), true );
-			
-			$localzed_value = array(
-				'ajaxurl' => admin_url( 'admin-ajax.php' )
-			);
-			wp_localize_script( 'tour-public-js', 'woo_tour', $localzed_value );
-			
-		} );
-		
 		add_filter( 'single_template', array( $this, 'register_custom_single_template' ) );
 		add_filter( 'template_include', array( $this, 'register_custom_tax_template' ) );
 		
@@ -52,11 +34,12 @@ class Tour_Plugin_Public {
 			'show_hotel_by_option_selected'
 		) );
 		
+		
 	}
 	
 	
 	private function load_public_dependencies() {
-		require_once PLUGIN_DIR . 'public/shortcode/shortcode-hello.php';
+		require_once PLUGIN_DIR . 'public/shortcode/tour-shortcode.php';
 	}
 	
 	/**
@@ -86,12 +69,29 @@ class Tour_Plugin_Public {
 		
 		wp_enqueue_script( 'jquery' );
 		wp_enqueue_script( 'jquery-ui-core' );
-		wp_enqueue_script( 'jquery-ui-datepicker', array( 'jquery', 'jquery-ui-core' ) );
+		wp_enqueue_script( 'jquery-ui-datepicker' );
+		wp_enqueue_script( 'jquery-ui-sortable' );
+		
+		wp_enqueue_script( 'tour-public-js', PLUGIN_URL . 'public/js/plugin-public.js', array(
+			'jquery'
+		), time(), true );
+		
+		$localzed_value = array(
+			'ajaxurl' => admin_url( 'admin-ajax.php' )
+		);
+		wp_localize_script( 'tour-public-js', 'woo_tour', $localzed_value );
+		
+		
+		wp_enqueue_script( 'tour-public-js', PLUGIN_URL . 'public/js/plugin-public.js', array(
+			'jquery',
+			'jquery-ui-core',
+			'jquery-ui-datepicker'
+		), time(), true );
 		
 		wp_enqueue_script( 'magnific-pop-up-js', PLUGIN_URL . 'public/js/magnific.js',
 			array( 'jquery' ), time(), true );
 		
-		wp_enqueue_script( 'tour-ui-modal', PLUGIN_URL . 'public/js/pop-up-modal.js',
+		wp_enqueue_script( 'pop-up-ui-js', PLUGIN_URL . 'public/js/pop-up-modal.js',
 			array( 'jquery' ), time(), true );
 		
 		wp_enqueue_script( 'fotoroma-js', PLUGIN_URL . 'public/js/fotorama.js',

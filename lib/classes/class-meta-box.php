@@ -25,6 +25,8 @@ if ( ! class_exists( 'AddMetaBox' ) ) {
 			
 			add_meta_box( $this->get_meta_box_id(), $this->get_meta_box_title(), array( $this, 'meta_box_callback' ),
 				$this->get_meta_box_screen(), $this->get_meta_box_context(), $this->get_meta_box_priority(), $this->get_callback_args() );
+			
+			
 		}
 		
 		
@@ -196,11 +198,8 @@ if ( ! class_exists( 'AddMetaBox' ) ) {
 							echo $panelsIndex; ?>">
 								<?php
 								foreach ( $panel['sections'] as $sectionIndex => $section ):
-									
 									$title = isset( $section['title'] ) ? $section['title'] : "";
 									$des = isset( $section['description'] ) ? $section['description'] : "";
-									
-									
 									?>
                                     <div class="section">
                                         <h1 id="<?php echo $sectionIndex; ?>"
@@ -209,7 +208,7 @@ if ( ! class_exists( 'AddMetaBox' ) ) {
 										
 										<?php do_action( 'tour_before_content_table_meta_box',
 											$this->get_post_id() ); ?>
-                                        
+
                                         <table class="form-table">
                                             <tbody>
 											
@@ -232,7 +231,9 @@ if ( ! class_exists( 'AddMetaBox' ) ) {
 														$option['value'] = $option_value;
 														
 														
-														$this->field_generator( $option )
+														$this->field_generator( $option );
+														
+														
 														?>
 
                                                     </td>
@@ -312,6 +313,8 @@ if ( ! class_exists( 'AddMetaBox' ) ) {
 			
 			if ( isset( $option['type'] ) && $option['type'] === 'text' ) {
 				echo $FormFieldsGenerator->field_text( $option );
+			} elseif ( isset( $option['type'] ) && $option['type'] === 'number' ) {
+				echo $FormFieldsGenerator->field_number( $option );
 			} elseif ( isset( $option['type'] ) && $option['type'] === 'text_multi' ) {
 				echo $FormFieldsGenerator->field_text_multi( $option );
 			} elseif ( isset( $option['type'] ) && $option['type'] === 'textarea' ) {
