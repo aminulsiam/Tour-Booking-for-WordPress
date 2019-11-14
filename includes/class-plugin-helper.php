@@ -58,7 +58,7 @@ if ( ! class_exists( 'Tour_Booking_Helper' ) ) {
                     </section>
 
                     <section class="pop-up-right">
-                        
+						
 						<?php
 						
 						if ( "flexible" == $tour_type ) {
@@ -102,8 +102,7 @@ if ( ! class_exists( 'Tour_Booking_Helper' ) ) {
                             </div>
 
                             <span class="hotel_details no_hotel"></span>
-						
-						
+                            
 						<?php } elseif ( 'tour' == $hotel_price_source ) {
 						
 						$tour_price = maybe_unserialize( get_post_meta( $post->ID, 'hotel_room_details',
@@ -247,7 +246,7 @@ if ( ! class_exists( 'Tour_Booking_Helper' ) ) {
                     </section>
                 </form>
             </div>
-            
+
             <script type="text/javascript">
 
                 jQuery('.total_person').on('change', function () {
@@ -268,9 +267,9 @@ if ( ! class_exists( 'Tour_Booking_Helper' ) ) {
                                 .html('<?php do_action( 'attendee_form_builder', get_the_id() ); ?>')
                         );
                     }
-                    
+
                 });
-                
+
             </script>
 			<?php
 		}

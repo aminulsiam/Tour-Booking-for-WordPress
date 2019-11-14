@@ -16,9 +16,10 @@ the_post();
 		}
 		
 		?>
-        <div class="fotorama" data-autoplay="5000" data-allowfullscreen="true" data-width="100%" data-height="auto">
+        <div class="fotorama" data-autoplay="3000" data-allowfullscreen="true" data-width="100%" data-height="auto">
 			
 			<?php
+			
 			the_post_thumbnail();
 			
 			foreach ( $gallary_images as $images ) {
@@ -180,7 +181,7 @@ the_post();
 						foreach ( $get_hotel_fares as $room_fares ) {
 							?>
                             <div class="column">
-                                <span><?php esc_html_e( '' . ucfirst( $room_fares['room_type'] ) . ' ', '' ) ?></span><strong><span
+                                <span><?php esc_html_e( '' . ucfirst( $room_fares['room_type'] ) . ' ', 'woocommerce-tour-booking-manager' ) ?></span><strong><span
                                             class="room_fare"><?php echo wc_price( $room_fares['room_fare'] );
 										?></span></strong>
                             </div>
@@ -223,6 +224,8 @@ the_post();
 
 </div>
 
+<script src="<?php echo PLUGIN_URL . 'public/js/pop-up-modal.js'; ?>"></script>
+
 <script type="text/javascript">
     jQuery('.add_to_cart').hide();
 
@@ -236,7 +239,7 @@ the_post();
     });
 
     jQuery('.hasDatepicker').last().datepicker('refresh');
-    
+
 </script>
 <?php get_footer(); ?>
 

@@ -327,3 +327,20 @@ select2 param css
     color: #bbbbbb;
     font-size: 14px;
 }
+
+.show-reports-stat {
+    width: 96%;
+    background: #fff;
+    border: 1px solid #ddd;
+    padding: 20px;
+    margin: 20px 0;
+}
+
+.show-reports-stat table {
+    width: 100%;
+    text-align: center;
+}
+
+.show-reports-stat table td {
+    border-right: 1px solid #ddd;
+}

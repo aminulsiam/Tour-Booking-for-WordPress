@@ -95,46 +95,117 @@ class Tour_Plugin_Admin {
 	 */
 	public function change_attendee_status( $order_id, $from_status, $to_status, $order ) {
 		
-		$order = wc_get_order( $order_id );
+		global $wtbm;
+		
+		$order             = wc_get_order( $order_id );
+		$order_meta        = get_post_meta( $order_id );
+		$wtbm_email_status = $wtbm->wtbm_get_option( 'ticket_manager_settings', 'pdf_email_send_on', array() );
+		
 		
 		foreach ( $order->get_items() as $item_id => $item_values ) {
 			
 			$hotel_id = $this->wtbm_get_order_meta( $item_id, '_tour_id' );
 			
+			//check post types
 			if ( get_post_type( $hotel_id ) == 'mage_tour' ) {
 				
-				if ( $order->has_status( 'processing' ) ) {
-					$this->change_tour_booking_status( $order_id, 'publish', 'publish', 'processing' );
+				if ( ! empty( $wtbm_email_status ) ) {
 					
-				}
-				
-				if ( $order->has_status( 'pending' ) ) {
-					$this->change_tour_booking_status( $order_id, 'publish', 'publish', 'pending' );
-				}
-				
-				if ( $order->has_status( 'on-hold' ) ) {
-					$this->change_tour_booking_status( $order_id, 'publish', 'publish', 'on-hold' );
-				}
-				
-				if ( $order->has_status( 'completed' ) ) {
-					$this->change_tour_booking_status( $order_id, 'publish', 'publish', 'completed' );
-				}
-				
-				if ( $order->has_status( 'cancelled' ) ) {
-					$this->change_tour_booking_status( $order_id, 'publish', 'publish', 'cancelled' );
-				}
-				
-				if ( $order->has_status( 'refunded' ) ) {
-					$this->change_tour_booking_status( $order_id, 'publish', 'publish', 'refunded' );
-				}
-				
-				if ( $order->has_status( 'failed' ) ) {
-					$this->change_tour_booking_status( $order_id, 'publish', 'publish', 'failed' );
-				}
+					if ( $order->has_status( 'processing' ) ) {
+						
+						if ( in_array( $order->get_status(), $wtbm_email_status ) ) {
+							$type = 'order-email';
+							$oid  = $order_id;
+							$wtbm->send_email( $order_id, $order, $type, $oid );
+						}
+						
+						
+						$this->change_tour_booking_status( $order_id, 'publish', 'publish', 'processing' );
+						
+					}
+					
+					if ( $order->has_status( 'pending' ) ) {
+						
+						if ( in_array( $order->get_status(), $wtbm_email_status ) ) {
+							$this->sent_ticket_email( $order_id, $order );
+						}
+						
+						$this->change_tour_booking_status( $order_id, 'publish', 'publish', 'pending' );
+					}
+					
+					if ( $order->has_status( 'on-hold' ) ) {
+						
+						if ( in_array( $order->get_status(), $wtbm_email_status ) ) {
+							$this->sent_ticket_email( $order_id, $order );
+						}
+						
+						$this->change_tour_booking_status( $order_id, 'publish', 'publish', 'on-hold' );
+					}
+					
+					if ( $order->has_status( 'completed' ) ) {
+						
+						if ( in_array( $order->get_status(), $wtbm_email_status ) ) {
+							$type = 'order-email';
+							$oid  = $order_id;
+							$wtbm->send_email( $order_id, $order, $type, $oid );
+						}
+						
+						$this->change_tour_booking_status( $order_id, 'publish', 'publish', 'completed' );
+					}
+					
+					if ( $order->has_status( 'cancelled' ) ) {
+						
+						if ( in_array( $order->get_status(), $wtbm_email_status ) ) {
+							$this->sent_ticket_email( $order_id, $order );
+						}
+						
+						$this->change_tour_booking_status( $order_id, 'publish', 'publish', 'cancelled' );
+					}
+					
+					if ( $order->has_status( 'refunded' ) ) {
+						
+						if ( in_array( $order->get_status(), $wtbm_email_status ) ) {
+							$this->sent_ticket_email( $order_id, $order );
+						}
+						
+						$this->change_tour_booking_status( $order_id, 'publish', 'publish', 'refunded' );
+					}
+					
+					if ( $order->has_status( 'failed' ) ) {
+						
+						if ( in_array( $order->get_status(), $wtbm_email_status ) ) {
+							$this->sent_ticket_email( $order_id, $order );
+						}
+						
+						$this->change_tour_booking_status( $order_id, 'publish', 'publish', 'failed' );
+					}
+				}//check email status
 				
 			} //end of Post Type Check
 		} //end order item foreach
 	} //end method change_attendee_status
+	
+	
+	function sent_ticket_email( $order_id, $order ) {
+		global $wpdb, $wtbm, $wtbmfunctions;
+		
+		$args = array(
+			'post_type'      => array( 'mage_tour_booking' ),
+			'posts_per_page' => - 1,
+			'meta_query'     => array(
+				array(
+					'key'     => 'wtbm_order_id',
+					'value'   => $order_id,
+					'compare' => '='
+				)
+			)
+		);
+		$loop = new WP_Query( $args );
+		while ( $loop->have_posts() ) {
+			$loop->the_post();
+			$wtbm->send_email( get_the_id(), $order );
+		}
+	}//end method sent_ticket_email
 	
 	
 	/**
@@ -341,20 +412,6 @@ class Tour_Plugin_Admin {
 		
 		wp_enqueue_script( 'jquery-ui-sortable' );
 		
-		wp_enqueue_style( 'wp-color-picker' );
-		
-		wp_enqueue_script( 'wp-color-picker' );
-		
-		wp_enqueue_script( 'magepeople-options-framework', plugins_url( 'assets/js/pickplugins-options-framework.js', __FILE__ ), array( 'jquery' ) );
-		
-		wp_localize_script( 'PickpluginsOptionsFramework', 'PickpluginsOptionsFramework_ajax', array( 'PickpluginsOptionsFramework_ajaxurl' => admin_url( 'admin-ajax.php' ) ) );
-		
-		wp_enqueue_script( 'select2.min', plugins_url( 'assets/js/select2.min.js', __FILE__ ), array( 'jquery' ) );
-		
-		wp_enqueue_script( 'codemirror', PLUGIN_URL . 'admin/assets/js/codemirror.min.js', array( 'jquery' ), null, false );
-		
-		wp_enqueue_script( 'form-field-dependency', plugins_url( 'assets/js/form-field-dependency.js', __FILE__ ), array( 'jquery' ), null, false );
-		
 		wp_enqueue_script( 'mage-plugin-js', PLUGIN_URL . 'admin/js/plugin-admin.js', array(
 			'jquery',
 			'jquery-ui-core',
@@ -368,7 +425,6 @@ class Tour_Plugin_Admin {
 		require_once PLUGIN_DIR . 'admin/class/class-create-tax.php';
 		require_once PLUGIN_DIR . 'admin/class/class-meta-box.php';
 		require_once PLUGIN_DIR . 'admin/class/class-tax-meta.php';
-		require_once PLUGIN_DIR . 'admin/class/class-export.php';
 	}
 	
 	
