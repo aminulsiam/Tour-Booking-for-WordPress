@@ -99,7 +99,7 @@ class Tour_Plugin_Admin {
 		
 		$order             = wc_get_order( $order_id );
 		$order_meta        = get_post_meta( $order_id );
-		$wtbm_email_status = $wtbm->wtbm_get_option( 'ticket_manager_settings', 'pdf_email_send_on', array() );
+		$wtbm_email_status = $wtbm->wtbm_get_option( 'tour_manager_settings', 'pdf_email_send_on', array() );
 		
 		
 		foreach ( $order->get_items() as $item_id => $item_values ) {
@@ -118,7 +118,6 @@ class Tour_Plugin_Admin {
 							$oid  = $order_id;
 							$wtbm->send_email( $order_id, $order, $type, $oid );
 						}
-						
 						
 						$this->change_tour_booking_status( $order_id, 'publish', 'publish', 'processing' );
 						
@@ -185,7 +184,10 @@ class Tour_Plugin_Admin {
 		} //end order item foreach
 	} //end method change_attendee_status
 	
-	
+	/**
+	 * @param $order_id
+	 * @param $order
+	 */
 	function sent_ticket_email( $order_id, $order ) {
 		global $wpdb, $wtbm, $wtbmfunctions;
 		
@@ -312,7 +314,6 @@ class Tour_Plugin_Admin {
 						update_post_meta( $pid, 'wtbm_tour_info', $tour_info );
 						update_post_meta( $pid, 'wtbm_hotel_info', $hotel_info );
 						
-						
 						foreach ( $reg_form_arr as $reg_form ) {
 							update_post_meta( $pid, $reg_form['field_id'], $users[ $reg_form['field_id'] ] );
 						}
@@ -391,13 +392,18 @@ class Tour_Plugin_Admin {
 	 */
 	public function enqueue_styles() {
 		wp_enqueue_style( 'mage-jquery-ui-style', PLUGIN_URL . 'admin/css/jquery-ui.css', array() );
+		
 		wp_enqueue_style( 'pickplugins-options-framework', PLUGIN_URL . 'admin/assets/css/pickplugins-options-framework.css' );
+		
+		//wp_enqueue_style( 'wp-color-picker' );
+		//wp_enqueue_style( 'wp-color-picker' );
+		
 		wp_enqueue_style( 'jquery-ui', PLUGIN_URL . 'admin/assets/css/jquery-ui.css' );
 		wp_enqueue_style( 'select2.min', PLUGIN_URL . 'admin/assets/css/select2.min.css' );
 		wp_enqueue_style( 'codemirror', PLUGIN_URL . 'admin/assets/css/codemirror.css' );
 		wp_enqueue_style( 'fontawesome', PLUGIN_URL . 'admin/assets/css/fontawesome.min.css' );
 		wp_enqueue_style( 'mage-admin-css', PLUGIN_URL . 'admin/css/mage-plugin-admin.css', array(), time(), 'all' );
-	}
+	}//end method enqueue_styles
 	
 	/**
 	 * Enqueue all scripts
@@ -412,12 +418,25 @@ class Tour_Plugin_Admin {
 		
 		wp_enqueue_script( 'jquery-ui-sortable' );
 		
-		wp_enqueue_script( 'mage-plugin-js', PLUGIN_URL . 'admin/js/plugin-admin.js', array(
+		wp_enqueue_style( 'wp-color-picker' );
+		wp_enqueue_script( 'wp-color-picker' );
+		
+		wp_enqueue_script( 'tour-magepeople-options-framework',
+			PLUGIN_URL . 'admin/assets/js/pickplugins-options-framework.js', array( 'jquery' ) );
+		
+		wp_enqueue_script( 'select2.min', PLUGIN_URL . 'admin/assets/js/select2.min.js', array( 'jquery' ), time(), true );
+		
+		wp_enqueue_script( 'codemirror', PLUGIN_URL . 'admin/assets/js/codemirror.min.js', array( 'jquery' ), null, false );
+		
+		wp_enqueue_script( 'form-field-dependency', plugins_url( 'assets/js/form-field-dependency.js', __FILE__ ), array( 'jquery' ), time(), false );
+		
+		wp_enqueue_script( 'mage-tour-plugin-js', PLUGIN_URL . 'admin/js/plugin-admin.js', array(
 			'jquery',
 			'jquery-ui-core',
 			'jquery-ui-datepicker'
 		), time(), true );
-	}
+		
+	}//end method enqueue_scripts
 	
 	
 	private function load_admin_dependencies() {
@@ -425,6 +444,7 @@ class Tour_Plugin_Admin {
 		require_once PLUGIN_DIR . 'admin/class/class-create-tax.php';
 		require_once PLUGIN_DIR . 'admin/class/class-meta-box.php';
 		require_once PLUGIN_DIR . 'admin/class/class-tax-meta.php';
+		require_once PLUGIN_DIR . 'admin/class/class-export.php';
 	}
 	
 	

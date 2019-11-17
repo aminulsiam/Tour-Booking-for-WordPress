@@ -6,10 +6,10 @@ if ( ! defined( 'ABSPATH' ) ) {
 class WtbmSettings {
 	
 	public function __construct() {
-		$this->wotm_settings();
+		$this->wtbm_settings();
 	}
 	
-	public function wotm_set_page_settings( $page_1_options, $page_2_options ) {
+	public function wtbm_set_page_settings( $page_1_options, $page_2_options ) {
 		$default = array(
 			'panelGroup-10' => $page_1_options,
 			'panelGroup-11' => $page_2_options,
@@ -18,7 +18,7 @@ class WtbmSettings {
 		return apply_filters( 'wtbm_settings_array', $default );
 	}
 	
-	private function wotm_settings() {
+	private function wtbm_settings() {
 		
 		
 		$setting_options_1 = array(
@@ -244,12 +244,12 @@ class WtbmSettings {
 			'capability'  => "manage_options",
 			'cpt_menu'    => "edit.php?post_type=mage_tour",
 			'menu_slug'   => "mage-tour-settings",
-			'option_name' => "ticket_manager_settings",
+			'option_name' => "tour_manager_settings",
 			'menu_icon'   => "dashicons-image-filter",
 			
 			'item_name'    => __( "Tour Booking Settings" ),
 			'item_version' => "1.0.0",
-			'panels'       => $this->wotm_set_page_settings( $setting_options_1, $page_2_options ),
+			'panels'       => $this->wtbm_set_page_settings( $setting_options_1, $page_2_options ),
 		);
 		$AddThemePage = new AddThemePage( $args );
 	}
