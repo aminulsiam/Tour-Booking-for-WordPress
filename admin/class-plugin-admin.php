@@ -97,10 +97,10 @@ class Tour_Plugin_Admin {
 		
 		global $wtbm;
 		
-		$order             = wc_get_order( $order_id );
-		$order_meta        = get_post_meta( $order_id );
-		$wtbm_email_status = $wtbm->wtbm_get_option( 'tour_manager_settings', 'pdf_email_send_on', array() );
+		$order      = wc_get_order( $order_id );
+		$order_meta = get_post_meta( $order_id );
 		
+		$wtbm_email_status = Tour_Booking_Helper::wtbm_get_option( 'tour_manager_settings', 'pdf_email_send_on', array() );
 		
 		foreach ( $order->get_items() as $item_id => $item_values ) {
 			

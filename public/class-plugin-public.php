@@ -34,6 +34,8 @@ class Tour_Plugin_Public {
 			'show_hotel_by_option_selected'
 		) );
 		
+		//this hook is fire when click on buy now
+		add_action( 'wp_ajax_buy_tour_pakage', array( $this, 'buy_tour_pakage' ) );
 		
 	}
 	
@@ -50,7 +52,7 @@ class Tour_Plugin_Public {
 		wp_enqueue_style( 'tour-jquery-ui-css', PLUGIN_URL . 'public/css/jquery-ui.css', array(), time(), 'all' );
 		
 		wp_enqueue_style( 'mage-tour-public-css', PLUGIN_URL . 'public/css/style.css', array(),
-            time(), 'all' );
+			time(), 'all' );
 		
 		wp_enqueue_style( 'magnific-pop-up', PLUGIN_URL . 'public/css/magnific.css', array(),
 			time(), 'all' );
@@ -134,6 +136,7 @@ class Tour_Plugin_Public {
 		return $template;
 	}
 	
+	
 	/**
 	 * Show hotel details by selected option.
 	 *
@@ -149,7 +152,6 @@ class Tour_Plugin_Public {
 		if ( ! is_array( $room_details ) ) {
 			$room_details = array();
 		}
-		
 		
 		$tour_duration = get_post_meta( $tour_id, 'tour_duration', true );
 		
@@ -183,7 +185,11 @@ class Tour_Plugin_Public {
                             <?php esc_html_e( $room['room_fare'] * $tour_duration ); ?>
                         </span>
 
-                        <span><?php echo wc_price( $room['room_fare'] * $tour_duration ); ?></span>
+                        <span><?php echo wc_price( $room['room_fare'] * $tour_duration ); ?>
+                            <p>
+                                <?php echo esc_html__( '(You Are selected your tour duration is ' . $tour_duration . ' Nights)', 'woocommerce-tour-booking-manager' ); ?>
+                            </p>
+                        </span>
 
                         <span class="person_capacity" style="display: none">
 

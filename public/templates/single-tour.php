@@ -187,6 +187,9 @@ the_post();
                             </div>
 						<?php } ?>
 
+                        
+                        
+                        
                         <div class="column full">
                             <div class="hotel-list">
 								
@@ -201,15 +204,26 @@ the_post();
 								<?php } ?>
                             </div>
                         </div>
+
+                        <div class="room_and_hotel_selection" style="display: none">
+		                    <?php echo Tour_Booking_Helper::hotel_details( $get_hotel_details ); ?>
+                        </div>
+                        
                     </div>
-					
-					<?php echo Tour_Booking_Helper::hotel_details( $get_hotel_details ); ?>
+
+                    <button class="btn btn-info buy_tour_pakage_button">
+						<?php echo esc_html__( 'Buy Now', 'woocommerce-tour-booking-manager' ); ?>
+                    </button>
+
+
 
                 </div>
             </div>
         </div>
     </div>
+	
 	<?php
+	
 	$tour_start_date = get_post_meta( $post->ID, 'start_date', true );
 	$tour_end_date   = get_post_meta( $post->ID, 'end_date', true );
 	
@@ -220,6 +234,7 @@ the_post();
 	$tour_end_year  = date( 'Y', strtotime( $tour_end_date ) );
 	$tour_end_month = date( 'm', strtotime( $tour_end_date ) );
 	$tour_end_day   = date( 'd', strtotime( $tour_end_date ) );
+	
 	?>
 
 </div>
@@ -232,6 +247,7 @@ the_post();
     jQuery(".datepicker").datepicker({
 
         dateFormat: 'yy-mm-dd',
+        defaultDate: null,
         minDate: new Date(<?php _e( $tour_start_year ); ?>, <?php _e( $tour_start_month ); ?> -1, <?php _e( $tour_start_day ); ?>),
 
         maxDate: new Date(<?php _e( $tour_end_year ); ?>, <?php _e( $tour_end_month ); ?> -1, <?php _e(

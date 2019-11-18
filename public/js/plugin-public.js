@@ -87,7 +87,7 @@
             if (input > 0) {
                 jQuery('.total_person').removeClass("total_person_error");
                 jQuery('.hotel_details').find('.total_person_show_error').find('p').hide();
-            }else{
+            } else {
                 jQuery('.total_person').addClass("total_person_error");
                 jQuery('.hotel_details').find('.total_person_show_error').find('p').show();
             }
@@ -115,8 +115,11 @@
 
                 if (total_room_price > 0) {
                     $('.pop_up_add_to_cart_button').show();
+                    $('.buy_tour_pakage_button').hide();
+
                 } else {
                     $('.pop_up_add_to_cart_button').hide();
+                    $('.buy_tour_pakage_button').show();
                 }
 
             });//end total fare calculation and max person allowed
@@ -140,38 +143,14 @@
             });
         }
 
-        //jquery dialog form
-        $(function () {
-            var dialog, form,
+        // fire this script when click on buy now
+        $('.buy_tour_pakage_button').on('click', function () {
 
-                dialog = $("#dialog-form").dialog({
-                    autoOpen: false,
-                    height: 400,
-                    width: 350,
-                    modal: true,
-                    buttons: {
-                        //"Buy": addUser,
-                        Cancel: function () {
-                            dialog.dialog("close");
-                        }
-                    },
-                    close: function () {
-                        //form[0].reset();
-                        //allFields.removeClass("ui-state-error");
-                    }
-                });
-
-
-            $("#create-user").button().on("click", function () {
-                dialog.dialog("open");
-            });
+            $('.room_and_hotel_selection').toggle(1000);
 
         });
 
 
-        $("#create-user").click(function (event) {
-            event.preventDefault();
-        });
 
         // search autocomplete
         $(".search").autocomplete({

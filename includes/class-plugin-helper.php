@@ -32,30 +32,8 @@ if ( ! class_exists( 'Tour_Booking_Helper' ) ) {
 			
 			?>
 
-            <button id="create-user" class="btn btn-info select_offer">
-				<?php echo esc_html__( 'Buy Now', 'woocommerce-tour-booking-manager' ) ?>
-            </button>
-
             <div id="dialog-form" title="Buy Your Tour Pakage">
                 <form action="" method="post">
-                    <section class="pop-up-left">
-                        <h3>How It Works</h3>
-
-                        <ul class="m0 pb8 f14 fw7 pfc3">
-                            <li class="block mt24 mb24"><span
-                                        class="round-bullets relative radius100 pfc1 p8 pt3 pb3 fw9 mr15 fleft">1</span>
-                                <span>Tell us details of your holiday plan.</span>
-                            </li>
-                            <li class="block mt24 mb24"><span
-                                        class="round-bullets relative radius100 pfc1 p8 pt3 pb3 fw9 mr15 fleft">2</span>
-                                <span>Get multiple quotes from expert agents, compare &amp; customize further.</span>
-                            </li>
-                        </ul>
-
-                        <h6>Call Us For Details</h6>
-                        <p class="phone_number" style="text-align: center">001 994 944</p>
-
-                    </section>
 
                     <section class="pop-up-right">
 						
@@ -102,7 +80,7 @@ if ( ! class_exists( 'Tour_Booking_Helper' ) ) {
                             </div>
 
                             <span class="hotel_details no_hotel"></span>
-                            
+						
 						<?php } elseif ( 'tour' == $hotel_price_source ) {
 						
 						$tour_price = maybe_unserialize( get_post_meta( $post->ID, 'hotel_room_details',
@@ -141,8 +119,10 @@ if ( ! class_exists( 'Tour_Booking_Helper' ) ) {
                                             <td>
                                                 <input type="hidden" name="room_name[]"
                                                        value="<?php esc_html_e( $room['room_type'] ); ?>">
-   <input type="hidden" name="room_cap[]"
-          value="<?php esc_html_e( $room['person_capacity'] ); ?>_<?php echo trim( $room['room_type'] ); ?>_<?php trim( esc_html_e( $room['room_fare'] ) ); ?>">
+                                                
+   <input type="hidden" name="room_cap[]" value="<?php esc_html_e( $room['person_capacity'] ); ?>_<?php
+   echo trim( $room['room_type'] ); ?>_<?php trim( esc_html_e( $room['room_fare'] ) ); ?>">
+	
 	                                            <?php esc_html_e( $room['room_type'] ); ?>
                                             </td>
 
@@ -397,6 +377,24 @@ if ( ! class_exists( 'Tour_Booking_Helper' ) ) {
 			wp_reset_postdata();
 			
 		}//end method search_and_all_tour_pakage
+		
+		/**
+         * Get settings from admin
+         *
+		 * @param $setting_name
+		 * @param $meta_key
+		 * @param null $default
+		 *
+		 * @return null
+		 */
+		public static function wtbm_get_option( $setting_name, $meta_key, $default = null ) {
+			$get_settings = get_option( $setting_name );
+			$get_val      = $get_settings[ $meta_key ];
+			$output       = $get_val ? $get_val : $default;
+			
+			return $output;
+		}
+		
 		
 	}//end class Tour_Booking_Helper
 }//end if condition

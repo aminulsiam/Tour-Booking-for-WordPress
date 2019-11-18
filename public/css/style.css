@@ -1647,7 +1647,7 @@ h4.mep-cart-table-title {
     }
 
     .tour-right-content {
-        width: 25%;
+        width: 30%;
         float: right;
     }
 
@@ -1984,6 +1984,7 @@ h4.mep-cart-table-title {
 
 .hotel_options select {
     width: 100% !important;
+    margin-bottom: 30px !important;
 }
 
 .tentative_date {
@@ -2182,7 +2183,7 @@ input[type=submit]:disabled {
     color: #fff;
     font-size: 22px;
     font-weight: bold;
-    min-width: 23vw;
+    min-width: 20vw;
     padding: 5px;
 }
 
@@ -2628,7 +2629,7 @@ li {
 }
 
 .pop-up-right {
-    width: 31vw;
+    width: 20vw;
     float: right;
     background-color: #fff !important;
     margin-right: 15px;
