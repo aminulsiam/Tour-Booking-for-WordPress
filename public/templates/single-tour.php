@@ -108,27 +108,22 @@ the_post();
 						<?php
 						global $post;
 						
-						$tour_offer_type = get_the_terms( $post->ID, 'tour_offer_type' );
-						
 						$tentative_start_date = get_post_meta( $post->ID, 'start_date', true );
 						$tentative_end_date   = get_post_meta( $post->ID, 'end_date', true );
 						
-						if ( ! is_array( $tour_offer_type ) ) {
-							$tour_offer_type = array();
-						}
-						
-						foreach ( $tour_offer_type as $type ) {
-							if ( 'fixed' == $type->name ) {
-								echo "<div class='title'><h6>" . esc_html__( 'Departure Time : ', 'woocommerce-tour-booking-manager' ) . esc_html( ucfirst( $type->name ) ) . "<span class='dashicons dashicons-lock'></span></h6></div>";
-							} else {
-								echo "<div class='title'><h6>" . esc_html__( 'Departure Time : ', 'woocommerce-tour-booking-manager' ) . esc_html( ucfirst( $type->name ) ) . "<span class='dashicons dashicons-unlock'></span></h6></div>";
-								
-								?>
-								<?php
-							}
-						}
 						?>
                     </div>
+					
+					<?php
+					$tour_duration = get_post_meta( $post->ID, 'tour_duration', true );
+					
+					
+					if ( ! empty( $tour_duration ) ) {
+						?>
+
+                        <p class="nb">N.B : This tour duration is <?php echo $tour_duration; ?> Nights</p>
+					
+					<?php } ?>
 
                     <div class="validities">
 						
@@ -147,6 +142,7 @@ the_post();
 							$tentative_end_date ) );
 						
 						?>
+
 
                         <div class="validity"><span><?php echo esc_html__( 'Valid From', 'woocommerce-tour-booking-manager' );
 								?></span>
@@ -169,54 +165,58 @@ the_post();
                     <div class="row-block">
 						
 						<?php
+						$hotel_price_source = get_post_meta( $post->ID, 'tour_price_source', true );
+						
 						$hotel_room_fares = get_post_meta( $post->ID, 'hotel_room_details',
 							true );
 						
 						$get_hotel_fares = maybe_unserialize( $hotel_room_fares );
 						
+						
 						if ( ! is_array( $get_hotel_fares ) ) {
 							$get_hotel_fares = array();
 						}
 						
-						foreach ( $get_hotel_fares as $room_fares ) {
-							?>
-                            <div class="column">
-                                <span><?php esc_html_e( '' . ucfirst( $room_fares['room_type'] ) . ' ', 'woocommerce-tour-booking-manager' ) ?></span><strong><span
-                                            class="room_fare"><?php echo wc_price( $room_fares['room_fare'] );
-										?></span></strong>
+						if ( 'tour' == $hotel_price_source ) {
+							
+							foreach ( $get_hotel_fares as $room_fares ) {
+								?>
+                                <div class="column">
+                                    <span><?php esc_html_e( '' . ucfirst( $room_fares['room_type'] ) . ' ', 'woocommerce-tour-booking-manager' ); ?></span><strong><span
+                                                class="room_fare">
+                                        <?php echo wc_price( $room_fares['room_fare'] ) . '(per night)';
+                                        ?></span></strong>
+                                </div>
+							<?php } ?>
+
+
+                            <div class="column full">
+                                <div class="hotel-list">
+									<?php
+									foreach ( $get_hotel_details as $hotel_name ) {
+										?>
+                                        <div class="item">
+                                            <span class="dashicons dashicons-admin-home"></span>
+                                            <span class="hotel_name"><?php _e( ucfirst( $hotel_name->name )
+												); ?></span>
+                                        </div>
+									<?php } ?>
+                                </div>
+                                <p class="nb"><?php echo esc_html__('N:B - We are selecting anyone hotel from above list','');?></p>
                             </div>
+						
 						<?php } ?>
 
-                        
-                        
-                        
-                        <div class="column full">
-                            <div class="hotel-list">
-								
-								<?php
-								foreach ( $get_hotel_details as $hotel_name ) {
-									?>
-                                    <div class="item">
-                                        <span class="dashicons dashicons-admin-home"></span>
-                                        <span class="hotel_name"><?php _e( ucfirst( $hotel_name->name )
-											); ?></span>
-                                    </div>
-								<?php } ?>
-                            </div>
+                        <div class="room_and_hotel_selection" style="display: none">
+							<?php echo Tour_Booking_Helper::hotel_details( $get_hotel_details ); ?>
                         </div>
 
-                        <div class="room_and_hotel_selection" style="display: none">
-		                    <?php echo Tour_Booking_Helper::hotel_details( $get_hotel_details ); ?>
-                        </div>
-                        
                     </div>
 
                     <button class="btn btn-info buy_tour_pakage_button">
 						<?php echo esc_html__( 'Buy Now', 'woocommerce-tour-booking-manager' ); ?>
                     </button>
-
-
-
+                    
                 </div>
             </div>
         </div>

@@ -249,8 +249,15 @@ class Tour_WotmCartCalculation {
 			foreach ( $tour_data as $hotel ) {
 				$term_arr = get_term_by( 'id', $hotel['hotel_id'], 'hotel_details' );
 				?>
-                <li> <?php _e( 'Room: ' ); ?> <?php echo $hotel['room_name'] . ' (' . wc_price( $hotel['room_price'] ) . ' X ' . $hotel['room_qty'] . ' = ' . wc_price( $hotel['room_price'] * $hotel['room_qty'] ); ?>
+
+                <li> <?php _e( 'Room: ' ); ?> <?php echo $hotel['room_name'] . ' (Per Night Price - ' . wc_price( $hotel['room_price'] ) . ')'; ?>
                     )
+                </li>
+
+                <li> <?php echo esc_html__( 'Tour Duration: ', '' ) . $tour_duration . ' Nights'; ?></li>
+
+
+                <li> <?php echo ( 'Total : ' ) . $tour_duration . ' Nights X Per Nights ' . wc_price( $hotel['room_price'] ) . ' = ' . wc_price( $tour_duration * $hotel['room_price'] ); ?>
                 </li>
 				
 				<?php
@@ -277,7 +284,7 @@ class Tour_WotmCartCalculation {
 					}
 					
 					echo '<li>Room Name: ' . $user_info['room_name'] . '</li>';
-//					echo '<li>Room Fare: ' . wc_price($user_info['room_price']) . '</li>';
+					
 					echo '</ul>';
 				}
 			}

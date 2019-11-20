@@ -55,19 +55,17 @@
             }
         });
 
-        //by default add to cart button hide in pop up
-        $(".hotel_details").find('.pop_up_add_to_cart_button').hide();
 
-
-        $('.hotel_details').on('click', '.pop_up_add_to_cart_button', function (e) {
+        $('.hotel_details').on('click', '.pop_up_add_to_cart_button', function () {
 
             var total_person = $('.hotel_details').find('.total_person').val();
 
-            if (parseInt(total_person) == 0) {
+            if (total_person == 0) {
 
                 $('.total_person').addClass("total_person_error");
 
-                $('.hotel_details').find('.total_person_show_error').append('<p class="error_text">Please add at least 1 traveller</p>');
+
+                // $('.hotel_details').find('.total_person_show_error').append('<p class="error_text">Please add at least 1 traveller</p>');
 
                 // $("form").submit(function (e) {
                 //     e.preventDefault();
@@ -75,21 +73,25 @@
                 // });
 
                 return false;
+            } else {
+
+                $('.total_person').removeClass("total_person_error");
+
+                return true;
             }
 
         });
 
-
+        // add to cart button disable if no of traveller is 0
         $('.hotel_details').on('change', '.total_person', function () {
+
             var inputs = jQuery(this).val() || 0;
             var input = parseInt(inputs);
 
             if (input > 0) {
-                jQuery('.total_person').removeClass("total_person_error");
-                jQuery('.hotel_details').find('.total_person_show_error').find('p').hide();
+                $('.pop_up_add_to_cart_button').attr('disabled', false);
             } else {
-                jQuery('.total_person').addClass("total_person_error");
-                jQuery('.hotel_details').find('.total_person_show_error').find('p').show();
+                $('.pop_up_add_to_cart_button').attr('disabled', true);
             }
 
         });
@@ -113,15 +115,6 @@
 
                 $(".total_person").attr({"max": total_person});
 
-                if (total_room_price > 0) {
-                    $('.pop_up_add_to_cart_button').show();
-                    $('.buy_tour_pakage_button').hide();
-
-                } else {
-                    $('.pop_up_add_to_cart_button').hide();
-                    $('.buy_tour_pakage_button').show();
-                }
-
             });//end total fare calculation and max person allowed
 
         });
@@ -144,12 +137,14 @@
         }
 
         // fire this script when click on buy now
-        $('.buy_tour_pakage_button').on('click', function () {
+        $('.buy_tour_pakage_button').on('click', function (e) {
 
-            $('.room_and_hotel_selection').toggle(1000);
+            e.preventDefault();
+
+            $(this).hide(1000);
+            $('.room_and_hotel_selection').show(1000);
 
         });
-
 
 
         // search autocomplete

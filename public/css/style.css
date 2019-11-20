@@ -2117,7 +2117,7 @@ input[type=submit]:disabled {
 
 .Module-option .text .row-block .column span {
     display: inline-block;
-    font-size: 18px;
+    font-size: 13px;
 }
 
 .Module-option .text .row-block .column strong {
@@ -2772,4 +2772,9 @@ form.example::after {
 
 .hotel_details .display_none_error {
     display: none;
+}
+
+.nb{
+    font-weight: bold;
+    font-size: 17px;
 }

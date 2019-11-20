@@ -45,8 +45,8 @@ if ( ! class_exists( 'Tour_Booking_Helper' ) ) {
                                 <label for=""><?php echo esc_html__( 'Tour Date :  ',
 										'woocommerce-tour-booking-manager' ); ?></label>
                                 <input type="text" class="datepicker" autocomplete="off" name="tour_date"
-                                       placeholder="Enter your likable tour data" required/>
-                                <span class="description"><?php echo esc_html__( 'Enter your likable tour date', 'woocommerce-tour-booking-manager' ); ?></span>
+                                       placeholder="Enter your tour start date" required/>
+                                <span class="description"><?php echo esc_html__( 'Enter your tour start date', 'woocommerce-tour-booking-manager' ); ?></span>
 
                             </div>
 							<?php
@@ -135,10 +135,6 @@ if ( ! class_exists( 'Tour_Booking_Helper' ) ) {
                                                 <span>
                                                     <?php echo wc_price( $room['room_fare'] *
                                                                          $tour_duration ); ?>
-                                                    <p>
-                                                        <?php echo esc_html__( '(You Are selected your tour duration is ' . $tour_duration . ' Nights)', 'woocommerce-tour-booking-manager' ); ?>
-                                                    </p>
-                                                    
                                                 </span>
 
                                                 <span class="person_capacity" style="display: none">
@@ -213,7 +209,7 @@ if ( ! class_exists( 'Tour_Booking_Helper' ) ) {
                                             
                                             <button type="submit" class="btn btn-info
                                             pop_up_add_to_cart_button" name="add-to-cart"
-                                                    value="<?php echo get_the_ID(); ?>">
+                                                    value="<?php echo get_the_ID(); ?>" disabled="disabled">
                                                 <?php
                                                 echo esc_html__( 'Add To Cart',
 	                                                'woocommerce-tour-booking-manager' ); ?>
@@ -379,8 +375,8 @@ if ( ! class_exists( 'Tour_Booking_Helper' ) ) {
 		}//end method search_and_all_tour_pakage
 		
 		/**
-         * Get settings from admin
-         *
+		 * Get settings from admin
+		 *
 		 * @param $setting_name
 		 * @param $meta_key
 		 * @param null $default

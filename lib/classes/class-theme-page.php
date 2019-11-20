@@ -60,9 +60,9 @@ if( ! class_exists( 'AddThemePage' ) ) {
 
             foreach ($this->get_pages() as $panelsIndex=>$panels):
 
-                //var_dump($panelsIndex);
+                $page_settings = isset($panels['page_settings']) ? $panels['page_settings'] : array();
 
-                foreach ($panels['page_settings'] as $sectionIndex=>$sections):
+                foreach ($page_settings as $sectionIndex=>$sections):
 
                     add_settings_section(
                         $sectionIndex,
@@ -322,7 +322,12 @@ if( ! class_exists( 'AddThemePage' ) ) {
                             ?>
                             <li class="nav-item-wrap <?php if(($page_settings_count > 1)) echo 'has-child'; ?> <?php if($current_page==$page_id) echo 'active'; ?>">
                                 <a dataid="<?php echo $page_id; ?>" href='#<?php //echo $pagenow.'?'.$nav_menu_url; ?><?php echo
-                                $page_id; ?>' class='nav-item'><?php echo $page['page_nav']; ?>
+                                $page_id; ?>' class='nav-item'>
+                                    
+                                    <?php
+                                    $page_nav = isset($page['page_nav']) ? $page['page_nav'] : "";
+                                    
+                                    echo $page_nav; ?>
 
                                     <?php if(($page_settings_count > 1)) echo '<i class="child-nav-icon fas fa-angle-down"></i>'; ?>
                                 </a>

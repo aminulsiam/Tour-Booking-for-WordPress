@@ -185,11 +185,7 @@ class Tour_Plugin_Public {
                             <?php esc_html_e( $room['room_fare'] * $tour_duration ); ?>
                         </span>
 
-                        <span><?php echo wc_price( $room['room_fare'] * $tour_duration ); ?>
-                            <p>
-                                <?php echo esc_html__( '(You Are selected your tour duration is ' . $tour_duration . ' Nights)', 'woocommerce-tour-booking-manager' ); ?>
-                            </p>
-                        </span>
+                        <span><?php echo wc_price( $room['room_fare'] * $tour_duration ); ?></span>
 
                         <span class="person_capacity" style="display: none">
 
@@ -254,7 +250,7 @@ class Tour_Plugin_Public {
                     <span class="form"></span>
 
                     <button type="submit" class="btn btn-info pop_up_add_to_cart_button"
-                            name="add-to-cart" style="display: none" value="<?php echo $tour_id; ?>">
+                            name="add-to-cart" disabled="disabled" value="<?php echo $tour_id; ?>">
 						<?php
 						echo esc_html__( 'Add To Cart', 'woocommerce-tour-booking-manager' );
 						?>
