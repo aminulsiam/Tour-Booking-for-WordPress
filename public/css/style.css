@@ -1641,7 +1641,7 @@ h4.mep-cart-table-title {
 @media (min-width: 1281px) {
 
     .tour-left-content {
-        width: 55%;
+        width: 50%;
         float: left;
         margin-right: 5px;
     }
@@ -2629,7 +2629,7 @@ li {
 }
 
 .pop-up-right {
-    width: 20vw;
+    width: 22vw;
     float: right;
     background-color: #fff !important;
     margin-right: 15px;
@@ -2765,9 +2765,9 @@ form.example::after {
 }
 
 .hotel_details .error_text {
-    display: inline-block;
     font-style: italic;
     color: red;
+    font-weight: bold;
 }
 
 .hotel_details .display_none_error {

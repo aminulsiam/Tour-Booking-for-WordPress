@@ -133,8 +133,9 @@ if ( ! class_exists( 'Tour_Booking_Helper' ) ) {
                                                 </span>
 
                                                 <span>
-                                                    <?php echo wc_price( $room['room_fare'] *
-                                                                         $tour_duration ); ?>
+                                                    <?php echo '(Per Night -' . $room['room_fare'] . ' X ' . $tour_duration . ' Nights ) = ' . wc_price( $room['room_fare'] * $tour_duration ); ?>
+                                                    
+                                                    
                                                 </span>
 
                                                 <span class="person_capacity" style="display: none">
@@ -207,13 +208,18 @@ if ( ! class_exists( 'Tour_Booking_Helper' ) ) {
                                             
                                             <span class="form"></span>
                                             
+                                            <span class="error_text" style="text-align: center">
+                                                <?php echo esc_html__('No Traveller Selected',''); ?>
+                                            </span>
+                                            
                                             <button type="submit" class="btn btn-info
-                                            pop_up_add_to_cart_button" name="add-to-cart"
-                                                    value="<?php echo get_the_ID(); ?>" disabled="disabled">
+                                            pop_up_add_to_cart_button" name="add-to-cart" disabled="disabled"
+                                                    value="<?php echo get_the_ID(); ?>">
                                                 <?php
                                                 echo esc_html__( 'Add To Cart',
 	                                                'woocommerce-tour-booking-manager' ); ?>
                                             </button>
+                                            
                                         </td>
                                     </tr>
 

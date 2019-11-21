@@ -3,7 +3,7 @@
     $(document).ready(function () {
 
         // selected hotel details show by selected options
-        $('.hotel').on('change', function (e) {
+        $('.hotel').on('change', function () {
             var $hotel = $(this).val();
             var $tour = $(this).data('id');
 
@@ -56,32 +56,6 @@
         });
 
 
-        $('.hotel_details').on('click', '.pop_up_add_to_cart_button', function () {
-
-            var total_person = $('.hotel_details').find('.total_person').val();
-
-            if (total_person == 0) {
-
-                $('.total_person').addClass("total_person_error");
-
-
-                // $('.hotel_details').find('.total_person_show_error').append('<p class="error_text">Please add at least 1 traveller</p>');
-
-                // $("form").submit(function (e) {
-                //     e.preventDefault();
-                //     $(this).unbind('.total_person');
-                // });
-
-                return false;
-            } else {
-
-                $('.total_person').removeClass("total_person_error");
-
-                return true;
-            }
-
-        });
-
         // add to cart button disable if no of traveller is 0
         $('.hotel_details').on('change', '.total_person', function () {
 
@@ -90,10 +64,11 @@
 
             if (input > 0) {
                 $('.pop_up_add_to_cart_button').attr('disabled', false);
-            } else {
+                $('.error_text').hide();
+            }else {
                 $('.pop_up_add_to_cart_button').attr('disabled', true);
+                $('.error_text').show();
             }
-
         });
 
 

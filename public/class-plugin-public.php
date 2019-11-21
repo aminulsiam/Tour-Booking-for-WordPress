@@ -184,8 +184,8 @@ class Tour_Plugin_Public {
                         <span style="display: none" class="room_price">
                             <?php esc_html_e( $room['room_fare'] * $tour_duration ); ?>
                         </span>
-
-                        <span><?php echo wc_price( $room['room_fare'] * $tour_duration ); ?></span>
+						
+						<?php _e( '(Per Night -' . $room['room_fare'] . ' X ' . $tour_duration . ' Nights ) = ' . wc_price( $room['room_fare'] * $tour_duration ) ); ?>
 
                         <span class="person_capacity" style="display: none">
 
@@ -219,7 +219,6 @@ class Tour_Plugin_Public {
                 <td align="right">
                     <input type="number" max="0" min="0" value="0" class="total_person" name="total_person"/>
 
-                    <span class="total_person_show_error"></span>
                 </td>
 
             </tr>
@@ -248,6 +247,11 @@ class Tour_Plugin_Public {
                 <td colspan="3">
 
                     <span class="form"></span>
+
+                    <span class="error_text">
+                        <?php echo esc_html__( 'No Traveller Selected',
+	                        'woocommerce-tour-booking-manager' ); ?>
+                    </span>
 
                     <button type="submit" class="btn btn-info pop_up_add_to_cart_button"
                             name="add-to-cart" disabled="disabled" value="<?php echo $tour_id; ?>">

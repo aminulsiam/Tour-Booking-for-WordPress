@@ -24,19 +24,21 @@ class Tour_Plugin_Admin {
 		add_action( 'admin_enqueue_scripts', array( $this, 'enqueue_scripts' ) );
 		
 		add_action( 'woocommerce_checkout_order_processed', array( $this, 'tour_booking_data_create' ) );
+		add_action( 'woocommerce_order_status_changed', array( $this, 'change_attendee_status' ), 10, 4 );
 		
 		add_action( 'wp_trash_post', array( $this, 'wtbm_booking_info_trash' ), 90 );
 		add_action( 'untrash_post', array( $this, 'wtbm_booking_info_untrash' ), 90 );
 		
-		
 	}
+	
 	
 	/**
 	 * @param $post_id
 	 */
 	public function wtbm_booking_info_trash( $post_id ) {
+	
 		$post_type   = get_post_type( $post_id );
-		$post_status = get_post_status( $post_id );
+	
 		if ( $post_type == 'shop_order' ) {
 			$this->change_tour_booking_status( $post_id, 'trash', 'publish', 'trash' );
 		}
@@ -46,13 +48,103 @@ class Tour_Plugin_Admin {
 	 * @param $post_id
 	 */
 	public function wtbm_booking_info_untrash( $post_id ) {
+		
 		$post_type   = get_post_type( $post_id );
-		$post_status = get_post_status( $post_id );
+		
 		if ( $post_type == 'shop_order' ) {
 			$this->change_tour_booking_status( $post_id, 'publish', 'trash', 'processing' );
 		}
 	}
 	
+	
+	/**
+	 * @param $order_id
+	 * @param $from_status
+	 * @param $to_status
+	 * @param $order
+	 */
+	public function change_attendee_status( $order_id, $from_status, $to_status, $order ) {
+		
+		global $wtbm, $wtbmfunctions;
+		
+		$order      = wc_get_order( $order_id );
+		$order_meta = get_post_meta( $order_id );
+		
+		
+		foreach ( $order->get_items() as $item_id => $item_values ) {
+			
+			$hotel_id = $this->wtbm_get_order_meta( $item_id, '_tour_id' );
+			
+			//check post types
+			if ( get_post_type( $hotel_id ) == 'mage_tour' ) {
+				
+				if ( $order->has_status( 'processing' ) ) {
+					
+					$this->change_tour_booking_status( $order_id, 'publish', 'publish', 'processing' );
+					
+				}
+				
+				if ( $order->has_status( 'pending' ) ) {
+					$this->change_tour_booking_status( $order_id, 'publish', 'publish', 'pending' );
+				}
+				
+				if ( $order->has_status( 'on-hold' ) ) {
+					$this->change_tour_booking_status( $order_id, 'publish', 'publish', 'on-hold' );
+				}
+				
+				if ( $order->has_status( 'completed' ) ) {
+					$this->change_tour_booking_status( $order_id, 'publish', 'publish', 'completed' );
+				}
+				
+				if ( $order->has_status( 'cancelled' ) ) {
+					$this->change_tour_booking_status( $order_id, 'publish', 'publish', 'cancelled' );
+				}
+				
+				if ( $order->has_status( 'refunded' ) ) {
+					$this->change_tour_booking_status( $order_id, 'publish', 'publish', 'refunded' );
+				}
+				
+				if ( $order->has_status( 'failed' ) ) {
+					$this->change_tour_booking_status( $order_id, 'publish', 'publish', 'failed' );
+				}
+				
+			} //end of Post Type Check
+		} //end order item foreach
+	} //end method change_attendee_status
+	
+	
+	/**
+	 *
+	 *
+	 * @param $order_id
+	 * @param $set_status
+	 * @param $post_status
+	 * @param $booking_status
+	 */
+	public function change_tour_booking_status( $order_id, $set_status, $post_status, $booking_status ) {
+		$args = array(
+			'post_type'      => array( 'mage_tour_booking' ),
+			'posts_per_page' => - 1,
+			'post_status'    => $post_status,
+			'meta_query'     => array(
+				array(
+					'key'     => 'wtbm_order_id',
+					'value'   => $order_id,
+					'compare' => '='
+				)
+			)
+		);
+		
+		$loop = new WP_Query( $args );
+		foreach ( $loop->posts as $ticket ) {
+			$post_id      = $ticket->ID;
+			$current_post = get_post( $post_id, 'ARRAY_A' );
+			update_post_meta( $post_id, 'wtbm_order_status', $booking_status );
+			$current_post['post_status'] = $set_status;
+			wp_update_post( $current_post );
+		}
+		
+	}//end method change_tour_booking_status
 	
 	
 	/**
@@ -80,7 +172,7 @@ class Tour_Plugin_Admin {
 	/**
 	 * @param $order_id
 	 */
-	function tour_booking_data_create( $order_id ) {
+	public function tour_booking_data_create( $order_id ) {
 		
 		if ( ! $order_id ) {
 			return;
