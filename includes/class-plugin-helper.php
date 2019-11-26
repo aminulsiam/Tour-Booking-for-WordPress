@@ -209,7 +209,7 @@ if ( ! class_exists( 'Tour_Booking_Helper' ) ) {
                                             <span class="form"></span>
                                             
                                             <span class="error_text" style="text-align: center">
-                                                <?php echo esc_html__('No Traveller Selected',''); ?>
+                                                <?php echo esc_html__( 'No Traveller Selected', '' ); ?>
                                             </span>
                                             
                                             <button type="submit" class="btn btn-info

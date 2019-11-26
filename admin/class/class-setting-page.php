@@ -9,10 +9,12 @@ class WtbmSettings {
 		$this->wtbm_settings();
 	}
 	
-	public function wtbm_set_page_settings( $page_1_options, $page_2_options ) {
+	public function wtbm_set_page_settings( $page_1_options, $page_2_options, $page_3_options ) {
+		
 		$default = array(
 			'panelGroup-10' => $page_1_options,
 			'panelGroup-11' => $page_2_options,
+			'panelGroup-12' => $page_3_options,
 		);
 		
 		return apply_filters( 'wtbm_settings_array', $default );
@@ -45,6 +47,10 @@ class WtbmSettings {
 								'wordpress_timestamp' => __( 'WordPress Timestamp', 'text-domain' ),
 							),
 						),
+						
+						
+					
+					
 					)
 				),
 				
@@ -90,7 +96,7 @@ class WtbmSettings {
 							'default'     => 'N:B - We are selecting anyone hotel from above list',
 							'placeholder' => __( 'Text value', 'text-domain' ),
 						),
-						
+					
 					
 					)
 				),
@@ -101,6 +107,8 @@ class WtbmSettings {
 		
 		
 		$page_2_options = apply_filters( 'pdf_email_settings', array() );
+		
+		$page_3_options = apply_filters( 'attendee_csv_settings', array() );
 		
 		
 		$args         = array(
@@ -119,7 +127,8 @@ class WtbmSettings {
 			
 			'item_name'    => __( "Tour Booking Settings" ),
 			'item_version' => "1.0.0",
-			'panels'       => $this->wtbm_set_page_settings( $setting_options_1, $page_2_options ),
+			'panels'       => $this->wtbm_set_page_settings( $setting_options_1, $page_2_options,
+				$page_3_options ),
 		);
 		$AddThemePage = new AddThemePage( $args );
 	}

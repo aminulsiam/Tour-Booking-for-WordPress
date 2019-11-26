@@ -36,25 +36,25 @@ class Tour_Plugin_Admin {
 	 * @param $post_id
 	 */
 	public function wtbm_booking_info_trash( $post_id ) {
-	
-		$post_type   = get_post_type( $post_id );
-	
+		
+		$post_type = get_post_type( $post_id );
+		
 		if ( $post_type == 'shop_order' ) {
 			$this->change_tour_booking_status( $post_id, 'trash', 'publish', 'trash' );
 		}
-	}
+	}//end method wtbm_booking_info_trash
 	
 	/**
 	 * @param $post_id
 	 */
 	public function wtbm_booking_info_untrash( $post_id ) {
 		
-		$post_type   = get_post_type( $post_id );
+		$post_type = get_post_type( $post_id );
 		
 		if ( $post_type == 'shop_order' ) {
 			$this->change_tour_booking_status( $post_id, 'publish', 'trash', 'processing' );
 		}
-	}
+	}//end method wtbm_booking_info_untrash
 	
 	
 	/**
@@ -64,8 +64,6 @@ class Tour_Plugin_Admin {
 	 * @param $order
 	 */
 	public function change_attendee_status( $order_id, $from_status, $to_status, $order ) {
-		
-		global $wtbm, $wtbmfunctions;
 		
 		$order      = wc_get_order( $order_id );
 		$order_meta = get_post_meta( $order_id );
@@ -182,7 +180,7 @@ class Tour_Plugin_Admin {
 		$order        = wc_get_order( $order_id );
 		$order_meta   = get_post_meta( $order_id );
 		$order_status = $order->get_status();
-		# Iterating through each order items (WC_Order_Item_Product objects in WC 3+)
+		
 		foreach ( $order->get_items() as $item_id => $item_values ) {
 			$tour_id = $this->wtbm_get_order_meta( $item_id, '_tour_id' );
 			
@@ -218,25 +216,19 @@ class Tour_Plugin_Admin {
 				
 				if ( is_array( $user_single_info ) && sizeof( $user_single_info ) > 0 ) {
 					
-					
 					$reg_form_arr = maybe_unserialize( get_post_meta( $tour_id, 'attendee_reg_form', true ) );
 					
 					foreach ( $user_info as $users ) {
 						
-						# code...
 						$title = '#' . $order_id . ' - ' . $tour_name;
 						
-						// ADD THE FORM INPUT TO $new_post ARRAY
 						$new_post = array(
 							'post_title'    => $title,
 							'post_content'  => '',
 							'post_category' => array(),
-							// Usable for custom taxonomies too
 							'tags_input'    => array(),
 							'post_status'   => 'publish',
-							// Choose: publish, preview, future, draft, etc.
 							'post_type'     => 'mage_tour_booking'
-							//'post',page' or use a custom post type if you want to
 						);
 						
 						//SAVE THE POST
@@ -282,16 +274,13 @@ class Tour_Plugin_Admin {
 							'post_title'    => $title,
 							'post_content'  => '',
 							'post_category' => array(),
-							// Usable for custom taxonomies too
 							'tags_input'    => array(),
 							'post_status'   => 'publish',
-							// Choose: publish, preview, future, draft, etc.
 							'post_type'     => 'mage_tour_booking'
-							//'post',page' or use a custom post type if you want to
 						);
 						
-						//SAVE THE POST
 						$pid = wp_insert_post( $new_post );
+						
 						update_post_meta( $pid, 'wtbm_tour_id', $tour_id );
 						update_post_meta( $pid, 'wtbm_hotel_id', $hotel_id );
 						update_post_meta( $pid, 'wtbm_start', $tour_start );
@@ -332,10 +321,6 @@ class Tour_Plugin_Admin {
 		
 		wp_enqueue_style( 'pickplugins-options-framework', PLUGIN_URL . 'admin/assets/css/pickplugins-options-framework.css' );
 		
-		//wp_enqueue_style( 'wp-color-picker' );
-		//wp_enqueue_style( 'wp-color-picker' );
-		
-		//wp_enqueue_style( 'jquery-ui', PLUGIN_URL . 'admin/assets/css/jquery-ui.css' );
 		wp_enqueue_style( 'select2.min', PLUGIN_URL . 'admin/assets/css/select2.min.css' );
 		wp_enqueue_style( 'codemirror', PLUGIN_URL . 'admin/assets/css/codemirror.css' );
 		wp_enqueue_style( 'fontawesome', PLUGIN_URL . 'admin/assets/css/fontawesome.min.css' );

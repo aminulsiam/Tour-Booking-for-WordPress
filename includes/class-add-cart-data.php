@@ -92,7 +92,8 @@ class Tour_WotmCartCalculation {
 			
 			$reg_form_arr = maybe_unserialize( get_post_meta( $product_id, 'attendee_reg_form', true ) );
 			
-			$cn = 0;
+			$cn      = 0;
+			$hotel_r = array();
 			foreach ( $tour_hotel_room_cap as $cap ) {
 				
 				$arr            = explode( '_', $cap );
@@ -267,7 +268,7 @@ class Tour_WotmCartCalculation {
 			if ( is_array( $ticket_user_info ) && sizeof( $ticket_user_info ) > 0 ) {
 				
 				foreach ( $ticket_user_info as $user_info ) {
-					echo '<ul class="cart-user-list"  style="margin-bottom: 30px!important">';
+					echo '<ul class="cart-user-list"  style="margin-bottom: 30px !important">';
 					
 					if ( ! is_array( $reg_form_arr ) ) {
 						$reg_form_arr = array();
@@ -282,8 +283,8 @@ class Tour_WotmCartCalculation {
 						}
 						
 					}
-					
-					echo '<li>Room Name: ' . $user_info['room_name'] . '</li>';
+
+//					echo '<li>Room Name: ' . $user_info['room_name'] . '</li>';
 					
 					echo '</ul>';
 				}
@@ -304,6 +305,7 @@ class Tour_WotmCartCalculation {
 	 */
 	public function add_data_into_order_item( $item, $cart_item_key, $values, $order ) {
 		$qrtid = $values['tour_id'];
+		
 		if ( get_post_type( $qrtid ) == 'mage_tour' ) {
 			
 			$tour_id               = $values['tour_id'];
@@ -351,7 +353,8 @@ class Tour_WotmCartCalculation {
 			$item->add_meta_data( 'Total Person', $total_person );
 		}
 		$item->add_meta_data( '_tour_id', $tour_id );
-	}
+		
+	}//end method add_data_into_order_item
 }
 
 new Tour_WotmCartCalculation();
